@@ -1,0 +1,134 @@
+c - 
+	1. single characte (type int)
+	
+
+s -
+	1. String of character (type String)
+
+p - 
+	1. Pointer address 
+
+d - 
+	1. signed decimal integer (type int)
+
+
+i - 
+	1. signed deciman integer (type int)
+	
+
+u - 
+	1. Unsigned decimal integer ()
+
+
+x - 
+	1. unsigned hexadecimal integer ()
+
+
+
+X -
+	1. unsigned hexadecimal integer (capital letter)
+
+
+number - 
+	1. Putting any number before the arguments reserve the space for output
+	2. Example - 
+		a. integers
+			i = 6;
+			printf("%3d\n", i);
+			-----output----
+			-> '  6' (two empty spaces in the start since output takes only one space)
+		b. strings
+			printf(":%15s:\n", "Hello, world!");
+			------output-------
+			-> :  Hello, world!:
+	3.	if the output is less then the width set then the remaining space will be filled with spaces in the start of output.
+
+
+'-' - 
+	//'-' this before number or string signifies that add whitespaces in the end rather then start;
+	1. in strings :- 
+		a.	The printf(“:%-10s:\n”, “Hello, world!”); statement prints the string, but prints at least 10 characters.
+			If the string is smaller “whitespace” is added at the end. (See next example.)
+		b.	The printf(“:%-15s:\n”, “Hello, world!”); statement prints the string, but prints at least 15 characters.
+			The string in this case is shorter than the defined 15 character, thus “whitespace” is added at the end 
+			(defined by the minus sign.)
+	
+	2. in numbers :- 
+		a. if number of digits are less then the number mentioned then whitespaces are added in start.
+			
+
+
+
+0 - 
+	1. in numbers :-
+		a. Left-pads the number with zeroes (0) instead of spaces, where padding is specified (see width sub-specifier).
+		b. 0 followed by the number - number of zeros before output will be number.
+		c. Example -
+			i = 65;
+			printf("%03d\n", i);
+			------output ------
+			-> 065 (it will have 1 zero in the start because number takes 2 digit)
+		d. Flag '0' is ignored when flag '-' is present
+	2. in strings :-
+		Doesn't works
+
+
+'.' - 
+	1. In strings
+		a. any digit after . signifies the number of characters that needs to printed in string
+		b. Example - 
+			I. The printf(“:%.10s:\n”, “Hello, world!”); statement prints the string, but print only 10 characters of the string. 
+			--------output-------
+			-> :Hello, wor:
+			II. The printf(“:%.15s:\n”, “Hello, world!”);
+			--------output--------
+			-> :Hello World!: (since the size of string is less then the 15, whole string is printed)
+
+
+* - 
+	1. The width is not specified in the format string,
+ 		but as an additional integer value argument preceding the argument that has to be formatted.
+	2. * can be used only on the starting it can only be preceeded by the '-'
+	2. if '-' before * 
+
+
+
+
+
+Combinations 
+
+number then . :-
+	1. in strings
+		a. example :-
+			printf(“:%15.10s:\n”, “Hello, world!”); 
+			(This will print total of 15 characters but only 10 characters of string will be printed)
+			-----output-------
+			->  :     Hello, wor:
+			(since only 10 characters can be printed from string so the remaining 5 are filled with spaces from begining)
+
+
+
+
+
+heirarchy of power:
+	1. strings  
+		a. '.' has more power than 'number' 
+			Example :-
+				I.	printf(":%15.10s:\n", "Hello, world!");
+				II.	printf(":%10.15s:\n", "Hello, world!");
+				// in first statement -> 
+					15 is number of total characters in output
+					10 is number of characters to be printed from string
+				// in second statement ->
+					Vice versa of first
+
+				output I -	:     Hello, wor:
+				(printed total 15 chacter 10 of which are from string and other 5 are filled with space in begining)
+				output II -	:Hello, world!:$
+				(printed total 15 characters all from the string since string has 15 charecter)
+				(Ignores the first arg i.e - 10)
+
+
+
+// Number of position before decimal point is called 'Width'
+// Number of position after decimal point is called the precision
