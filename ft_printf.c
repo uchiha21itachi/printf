@@ -15,46 +15,25 @@
 
 void	ft_printf(char *format, ...)
 {
+	
 	va_list	list;
 	char	*p;
 	int		ival;
 	char	*val_str;
+	int 	counter = 0;
 
 	va_start (list, format);
 	p = format;
 	while (*p)
 	{
-		if (*p != '%')
+		printf ("%c\n", *p++);
+		if (*p++ == '%')
 		{
-			// printf ("------!%%----\n");
-			ft_putchar(*p);
-			// printf ("\n");
-			p++;
-		}
-		else
-		{
-			p++;
-			// printf ("p");
-			if (*p == 'i')
-			{
-				ival = va_arg(list, int);
-				printf ("%d\n", ival); 
-				p++;
-			}
-			else if (*p == 's')
-			{
-				val_str = va_arg (list, char*);
-				ft_putstr (val_str);
-				p++;
-			}
-		}
+			if (*p == '')
+		}	
 	}
-	va_end(list);
-}
-
-void 	test_fun(char c)
-{
-	printf ("char is - %c", c);
+	printf ("%d\n", counter);
+	va_end(list);		
 }
 
 int main()
@@ -67,8 +46,33 @@ int main()
 
 	str =  p;
 	str2 = p2;
-	// ft_printf("%i", k);
-	test_fun(k);
-	// ft_printf ("%s heelo\n %s %i %s", str, str2, k, str);
+
+	ft_printf ("%s heelo %s %i %s", str, str2, k, str);
 
 }
+
+
+// if (*p != '%')
+// 		{
+// 			// printf ("------!%%----\n");
+// 			ft_putchar(*p);
+// 			// printf ("\n");
+// 			p++;
+// 		}
+// 		else
+// 		{
+// 			p++;
+// 			// printf ("p");
+// 			if (*p == 'i')
+// 			{
+// 				ival = va_arg(list, int);
+// 				printf ("%d\n", ival); 
+// 				p++;
+// 			}
+// 			else if (*p == 's')
+// 			{
+// 				val_str = va_arg (list, char*);
+// 				ft_putstr (val_str);
+// 				p++;
+// 			}
+// 		}

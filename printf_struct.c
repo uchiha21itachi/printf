@@ -1,51 +1,56 @@
 #include "ft_printf.h"
 #include <stdlib.h>
+#include "../libft/yassharm4/libft.h"
 
 typedef struct	f_list
 {
-	char				c;
-	struct f_list	*next;
+	int					i;
+	char				*c;
 }					f_list;
 
 
-f_list	*ft_lstnew(char ch)
+char	*ft_strdup(const char *s1)
 {
-	f_list	*new;
+	char	*p;
+	size_t	length;
+	size_t	i;
 
-	new = (f_list *)malloc(sizeof(f_list));
-	if (new == 0)
+	i = 0;
+	length = ft_strlen(s1);
+	p = (char *)malloc((length + 1) * sizeof(char));
+	if (p == 0)
 		return (NULL);
-	new->c = ch;
-	new->next = NULL;
-	return (new);
-}
-
-void	ft_lstadd_back(f_list **alst, char c)
-{
-	f_list *ls;
-
-	if (!alst)
-		return ;
-	if (*alst)
-		ls = *alst;
 	else
 	{
-		*alst = ft_lstnew(c);
-		return ;
+		while (i < length)
+		{
+			p[i] = s1[i];
+			i++;
+		}
+		p[i] = '\0';
 	}
-	while (ls->next != NULL)
-		ls = ls->next;
-	ls->c = c;
-	ls->next = NULL;
+	return (p);
 }
 
 int main()
 {
-	char c;
-	f_list	*alst;
-	f_list	*new;
+	f_list	*p;
+	int		l;
+	char	*s;
+	int		k;
 
-	
-	new = ft_lstadd_back(&alst, 'i');
-	
+	k = 10;
+	s = (char *)malloc(k + 1 * sizeof(char));
+	s = ft_strdup("Hell yeah");
+	s[k] = '\0';
+	p = (f_list *)malloc(sizeof (f_list));
+	l = 10;
+	p->i = l;
+	printf("%d\n",p->i);
+	p->c = "Hell";
+	printf ("%s", p->c);
+	free(p);
+	if (*s)
+		free(s);
+	while (1);
 }
