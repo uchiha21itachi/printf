@@ -17,11 +17,30 @@
 #include <stdarg.h> 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-void 	ft_putstr (char *str);
+// #include "../libft/yassharm4/libft.h"
+
+typedef struct	f_list
+{
+	int		precision;
+	int		width;
+	int		plus_flag;
+	int		dash_flag;
+	int		zero_flag;
+}				f_list;
+
+void	ft_printf(char *format, ...);
+
+
+//printing functions in ft_printf_utils
+
 void	ft_putchar(char c);
-void	ft_putnbr(int n);
 
+//libft functions 
+char	*ft_strdup(char *s1);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char s2);
 
 
 #endif

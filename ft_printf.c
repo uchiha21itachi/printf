@@ -12,67 +12,61 @@
 
 #include "ft_printf.h"
 
+int		check_converter(char p)
+{
+	char	*str;
+	int		i;
+	
+	i = 0;
+	str = ft_strdup("scdiupxX");
+	while (*str)
+	{
+		if (p == *str)
+			return (0);
+		str++;
+		i++;
+	}
+	printf ("%p\n", str);
+	free (str - i);
+	return (1);
+}
 
 void	ft_printf(char *format, ...)
 {
-	
-	va_list	list;
-	char	*p;
-	int		ival;
-	char	*val_str;
-	int 	counter = 0;
 
-	va_start (list, format);
+	va_list			arg_list;
+	char			*p;
+	static	char		*str;
+	char			*temp;
+	int				i;
+
+
+	if (!str)
+	{
+		str = ft_strdup("test");
+	}
+	va_start(arg_list, format);
 	p = format;
 	while (*p)
 	{
-		printf ("%c\n", *p++);
+
+		while (*p != '%' && *p)
+			ft_putchar(*p++);
 		if (*p++ == '%')
 		{
-			if (*p == '')
-		}	
+			while ((i = check_converter(*p) == 1))
+			{
+				temp = str;
+				str = ft_strjoin(temp, *p++);
+				printf ("%s\n", str);
+				free (temp);
+				temp = NULL;
+			}
+			free (str);
+			str = NULL;
+		}
+		p++;
 	}
-	printf ("%d\n", counter);
-	va_end(list);		
+	va_end(arg_list);
+	// free (str);
 }
-
-int main()
-{
-	char *str;
-	char p[30] = "Hello    ";
-	char *str2;
-	char p2[40] = "World";
-	int k = 88;
-
-	str =  p;
-	str2 = p2;
-
-	ft_printf ("%s heelo %s %i %s", str, str2, k, str);
-
-}
-
-
-// if (*p != '%')
-// 		{
-// 			// printf ("------!%%----\n");
-// 			ft_putchar(*p);
-// 			// printf ("\n");
-// 			p++;
-// 		}
-// 		else
-// 		{
-// 			p++;
-// 			// printf ("p");
-// 			if (*p == 'i')
-// 			{
-// 				ival = va_arg(list, int);
-// 				printf ("%d\n", ival); 
-// 				p++;
-// 			}
-// 			else if (*p == 's')
-// 			{
-// 				val_str = va_arg (list, char*);
-// 				ft_putstr (val_str);
-// 				p++;
-// 			}
-// 		}
