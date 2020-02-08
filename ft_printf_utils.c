@@ -10,34 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
-void	ft_putnbr(int n)
+int		check_converter(char p)
 {
-	int		neg;
-	char	c;
-
-	c = 45;
-	neg = 0;
-	if (n == -2147483648)
+	char	*str;
+	int		i;
+	
+	i = 0;
+	str = ft_strdup("scdiupxX");
+	while (*str)
 	{
-		ft_putchar(c);
-		ft_putchar(50);
-		n = 147483648;
+		if (p == *str)
+			return (0);
+		str++;
+		i++;
 	}
-	if (n < 0 && n != -2147483648)
-	{
-		ft_putchar(c);
-		n = n * -1;
-	}
-	if (n >= 10)
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
-	else
-		ft_putchar(n + 48);
+	// printf ("%p\n", str);
+	free (str - i);
+	return (1);
 }
 
 void 	ft_putstr (char *str)

@@ -218,11 +218,11 @@ void	i_and_d_conversion_with_flag2(void)
 
 	//precision > width
 	//1.1 precision > num_length && width > num_length	
-	printf ("%010.15d\n", 12203);
+	printf ("%10.15d\n", 12203);
 	//1.2 precision < num_length && width < num_length	
-	printf ("%02.4d\n", 12203);
+	printf ("%2.4d\n", 12203);
 	//1.3 precision > num_length && width < num_length	
-	printf ("%02.10d\n", 12203);
+	printf ("%2.10d\n", 12203);
 	printf("-----------------------------------\n");
 
 	//width > precision
@@ -243,9 +243,9 @@ void	i_and_d_conversion_with_flag2(void)
 
 	//only width
 	//4.1 width greater than number length
-	printf ("%0-10d\n", 12203);
+	printf ("%10d\n", 12203);
 	//4.2 width less than number length
-	printf ("%03d\n", 12203);
+	printf ("%3d\n", 12203);
 	printf("-----------------------------------\n");
 
 	//only precision
@@ -258,6 +258,8 @@ void	i_and_d_conversion_with_flag2(void)
 }
 
 
+#include <unistd.h>
+
 int main()
 {
 	// i_and_d_conversion();
@@ -265,4 +267,15 @@ int main()
 	// i_and_d_conversion_with_flag1();
 	// printf("----------------------------------------------------------------\n");
 	// i_and_d_conversion_with_flag2();
+	char str[5] = "34531";	
+	int num;
+	int i = 0;
+
+	num = 0;
+	while (i < 5)
+	{
+		num = (num * 10) + (str[i] - 48);
+		printf ("num = %d\n", num);
+		i++;
+	}
 }

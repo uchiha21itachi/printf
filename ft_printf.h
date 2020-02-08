@@ -24,13 +24,16 @@
 typedef struct	f_list
 {
 	int		precision;
+	int		p_avail;
 	int		width;
-	int		plus_flag;
-	int		dash_flag;
+	int		star_flag;
+	int		minus_flag;
 	int		zero_flag;
+	int		count;
+
 }				f_list;
 
-void	ft_printf(char *format, ...);
+int		ft_printf(const char *format, ...);
 
 
 //printing functions in ft_printf_utils
@@ -41,6 +44,11 @@ void	ft_putchar(char c);
 char	*ft_strdup(char *s1);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char s2);
+int		ft_isdigit(int c);
 
+//parser functions inside parser.utils.c 
+
+f_list		update_flags(char c, f_list block);
+int		is_flag(char c);
 
 #endif
