@@ -15,3 +15,25 @@ f_list		update_flags(char c, f_list block)
 		block.zero_flag = 1;
 	return (block);
 }
+
+f_list		check_stars(f_list block, const char *format)
+{
+	int i;
+
+	i = -1;
+	while (format[++i] != '\0')
+	{
+		if (format[i] == '.')
+		{
+			while (format[i] != '\0')
+			{
+				if (format[i] == '*')
+					block.p_star = 1;
+				i++;
+			}
+		}
+		if (format[i] == '*')
+			block.w_star = 1;
+	}
+	return (block);
+}

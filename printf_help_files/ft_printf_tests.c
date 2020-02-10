@@ -227,7 +227,7 @@ void	i_and_d_conversion_with_flag2(void)
 
 	//width > precision
 	//2.1 precision > num_length && width > num_length	
-	printf ("%015.10d\n", 12203);
+	printf ("%015.-0-10d\n", 12203);
 	//2.2 precision < num_length && width < num_length	
 	printf ("%04.2d\n", 12203);	
 	//2.3 precision < num_length && width > num_length	
@@ -267,15 +267,6 @@ int main()
 	// i_and_d_conversion_with_flag1();
 	// printf("----------------------------------------------------------------\n");
 	// i_and_d_conversion_with_flag2();
-	char str[5] = "34531";	
-	int num;
-	int i = 0;
-
-	num = 0;
-	while (i < 5)
-	{
-		num = (num * 10) + (str[i] - 48);
-		printf ("num = %d\n", num);
-		i++;
-	}
+	printf ("%10.020d\n", 1292);
+	printf ("%010.20d\n", 1292);
 }

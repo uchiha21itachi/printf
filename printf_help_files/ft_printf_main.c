@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../ft_printf.h"
 
 void	test1(void)
 {
@@ -41,11 +41,11 @@ void	test2(void)
 {
 	//precision > width
 	//1.1 precision > num_length && width > num_length	
-	ft_printf ("%-10.15d\n", 12203);
+	ft_printf ("%-10.015d\n", 12203);
 	//1.2 precision < num_length && width < num_length	
-	ft_printf ("%-2.4d\n", 12203);
+	ft_printf ("%-2.-4d\n", 12203);
 	//1.3 precision > num_length && width < num_length	
-	ft_printf ("%-2.10d\n", 12203);
+	ft_printf ("%-020.0010d\n", 12203);
 	ft_printf("-----------------------------------\n");
 
 	//width > precision
@@ -73,7 +73,7 @@ void	test2(void)
 
 	//with only precision
 	//5.1 precision greater than number length
-	ft_printf ("%0-.10d\n", 12203);
+	ft_printf ("%-.10d\n", 12203);
 	//5.2 precision less than number length
 	ft_printf ("%-.4d\n", 12203);
 	ft_printf("-----------------------------------\n");
@@ -81,5 +81,6 @@ void	test2(void)
 
 int main()
 {
-	test2();
+	ft_printf ("hello there %-10.2d\n", 12203);	
+	// test2();
 }
