@@ -19,7 +19,6 @@ f_list		set_init_data(f_list block)
 	block.p_star = 0;
 	block.width = 0;
 	block.w_star = 0;
-	block.star_flag = 0;
 	block.zero_flag = 0;
 	block.minus_flag = 0;
 	return (block);
@@ -47,26 +46,26 @@ f_list		parse_flags(f_list block, const char *format, int i)
 	return (block);
 }
 
-f_list		check_conversion(f_list block, const char *format, int i)
+f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 {
 	while (format[i] != '\0')
 	{
-		if (format[i] == 's')
-			block = convert_string(&format[0], block, i);
-		else if (format[i] = 'd')
-			block = convert_digit(&format[0], block, i);
-		else if (format[i] = 'i')
-			block = convert_integer(&format[0], block, i);
-		else if (format[i] = 'c')
-			block = convert_character(&format[0], block, i);
-		else if (format[i] = 'p')
-			block = convert_pointer(&format[0], block, i);
-		else if (format[i] = 'x')
-			block = convert_hexa(&format[0], block, i);
-		else if (format[i] = 'X')
-			block = convert_unsigned_hexa(&format[0], block, i);
-		else if (format[i] = 'u')
-			block = convert_unsigned_decimal(&format[0], block, i);
+		// if (format[i] == 's')
+			// block = parse_s(block, &format[0], i, arg_list);
+		// else if (format[i] == 'd')
+			// block = parse_d(block, &format[0], i, arg_list);
+		// else if (format[i] = 'i')
+		// 	block = parse_i(&format[0], block, i, arg_list);
+		if (format[i] == 'c')
+			block = parse_c(block, &format[0], i, arg_list);
+		// else if (format[i] = 'p')
+		// 	block = parse_p(&format[0], block, i, arg_list);
+		// else if (format[i] = 'x')
+		// 	block = parse_x(&format[0], block, i, arg_list);
+		// else if (format[i] = 'X')
+		// 	block = parse_X(&format[0], block, i, arg_list);
+		// else if (format[i] = 'u')
+		// 	block = parse_u(&format[0], block, i, arg_list);
 		i++;
 	}
 	return (block);
@@ -75,9 +74,9 @@ f_list		check_conversion(f_list block, const char *format, int i)
 f_list		set_data(f_list block, int i, const char *format, va_list arg_list)
 {
 	block = set_init_data(block);
-	block = check_stars(block, &format[0]);
+	block = check_stars(block, &format[0], arg_list);
 	block = parse_flags(block, &format[0], i);
-	block = check_conversion(block, &format[0], i);
+	block = parse(block, &format[0], i, arg_list);
 	return (block);
 }
 
@@ -97,47 +96,17 @@ int			ft_printf(const char *format, ...)
 			if (format[i + 1] == '%' && (i = i + 1))
 				block.count += write(1, "%", 1);
 			block = set_data(block, i, &format[0], arg_list);
+			while (format[i] != 'c')
+				i++;
 		}
 		else
-			block.count = write(1, &format[i], 1);
+		{
+			block.count += write(1, &format[i], 1);
+			// printf ("printing char - %c\n", format[i]);
+			// printf ("I  - %i\n", i);
+			// printf ("Block count - %d\n", block.count);
+		}
 	}
 	va_end(arg_list);
-	return (0);
+	return (block.count);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// printf("\n-----------------------------------------\n");
-	// printf("\nflags -\n");
-	// printf("zero = %d\n", block.zero_flag);
-	// printf("minus = %d\n", block.minus_flag);
-	// printf("width = %d\n", block.width);
-	// printf("width star? = %d\n", block.w_star);
-	// printf("precision avail? = %d\n", block.p_avail);
-	// printf("precision star? = %d\n", block.p_star);
-	// printf("precision = %d\n", block.precision);
-	// printf("\n-----------------------------------------\n");

@@ -23,3 +23,16 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
+
+void	print_block(f_list block)
+{
+	printf ("\nPrinting all the values of block\n");
+	printf ("width - %d\n", block.width);
+	printf ("w.star - %d\n", block.w_star);
+	printf ("precision avail? - %d\n", block.p_avail);
+	printf ("p.star - %d\n", block.p_star);
+	printf ("precision - %d\n", block.precision);
+	printf ("zero flag - %d\n", block.zero_flag);
+	printf ("minus flag - %d\n", block.minus_flag);
+	printf ("block count - %d\n", block.count);
+}
