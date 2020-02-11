@@ -126,6 +126,7 @@ void	i_and_d_conversion(void)
 {
 	//precision > width
 	//1.1 precision > num_length && width > num_length	
+	//...........................
 	printf ("%10.15d\n", 12203);
 	//1.2 precision < num_length && width < num_length	
 	printf ("%2.4d\n", 12203);
@@ -227,7 +228,7 @@ void	i_and_d_conversion_with_flag2(void)
 
 	//width > precision
 	//2.1 precision > num_length && width > num_length	
-	printf ("%015.-0-10d\n", 12203);
+	printf ("%015.10d\n", 12203);
 	//2.2 precision < num_length && width < num_length	
 	printf ("%04.2d\n", 12203);	
 	//2.3 precision < num_length && width > num_length	
@@ -262,11 +263,10 @@ void	i_and_d_conversion_with_flag2(void)
 
 int main()
 {
-	// i_and_d_conversion();
-	// printf("----------------------------------------------------------------\n");
-	// i_and_d_conversion_with_flag1();
-	// printf("----------------------------------------------------------------\n");
-	// i_and_d_conversion_with_flag2();
-	printf ("%10.020d\n", 1292);
-	printf ("%010.20d\n", 1292);
+	printf("%10c\n", 65);
+	ft_printf("%10c\n", 65);
+	printf("%-10c\n", 65);
+	ft_printf("%-10c\n", 65);
+
 }
+	

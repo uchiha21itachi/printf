@@ -81,6 +81,26 @@ void	test2(void)
 
 int main()
 {
-	ft_printf ("hello there %-10.2d\n", 12203);	
-	// test2();
+	int i = 0;
+
+		// i = printf("%10c\n", 65);
+		// printf ("i in printf %d\n", i);
+		
+		// i = ft_printf("%10c\n", 65);
+		// printf ("i in ft_printf %d\n", i);
+		
+		
+		// i = printf("%-10c\n", 65);
+		// printf ("i in printf %d\n", i);
+		
+		// i = ft_printf("%-10c\n", 65);
+		// printf ("i in ft_printf %d\n", i);
+		
+		
+		i = printf("%*c\n", 62, 65);
+		printf ("i in printf %d\n", i);
+		
+		i = ft_printf("%*c\n", 62, 65);
+		printf ("i in ft_printf %d\n", i);
+
 }
