@@ -50,6 +50,8 @@ f_list		check_stars(f_list block, const char *format, va_list arg_list);
 void		ft_putchar(char c);
 int			ft_isdigit(int c);
 void		print_block(f_list block);
+int			check_specifier(char c);
+
 
 
 // Functions handling string conversion in ft_printf_strings

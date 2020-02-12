@@ -24,6 +24,20 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
+int	check_specifier(char c)
+{
+	char 	*str;
+	
+	str = "sciduxXp";
+	printf ("format - %c", c);
+	while (*str)
+	{
+		if (*str == c)
+			return (1);
+		str++;
+	}
+	return (0);
+}
 void	print_block(f_list block)
 {
 	printf ("\nPrinting all the values of block\n");

@@ -50,13 +50,13 @@ f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 {
 	while (format[i] != '\0')
 	{
-		// if (format[i] == 's')
-			// block = parse_s(block, &format[0], i, arg_list);
+		if (format[i] == 's')
+			block = parse_s(block, &format[0], i, arg_list);
 		// else if (format[i] == 'd')
 			// block = parse_d(block, &format[0], i, arg_list);
 		// else if (format[i] = 'i')
 		// 	block = parse_i(&format[0], block, i, arg_list);
-		if (format[i] == 'c')
+		else if (format[i] == 'c')
 			block = parse_c(block, &format[0], i, arg_list);
 		// else if (format[i] = 'p')
 		// 	block = parse_p(&format[0], block, i, arg_list);
@@ -77,7 +77,7 @@ f_list		set_data(f_list block, int i, const char *format, va_list arg_list)
 	block = check_stars(block, &format[0], arg_list);
 	block = parse_flags(block, &format[0], i);
 	block = parse(block, &format[0], i, arg_list);
-	return (block);
+	return (block)
 }
 
 int			ft_printf(const char *format, ...)
@@ -85,6 +85,7 @@ int			ft_printf(const char *format, ...)
 	va_list			arg_list;
 	int				i;
 	f_list			block;
+	int				k;
 
 	i = -1;
 	block.count = 0;
@@ -93,6 +94,8 @@ int			ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			k = check_specifier(format[i]);
+			// printf ("k = %d", k);
 			if (format[i + 1] == '%' && (i = i + 1))
 				block.count += write(1, "%", 1);
 			block = set_data(block, i, &format[0], arg_list);
@@ -102,9 +105,9 @@ int			ft_printf(const char *format, ...)
 		else
 		{
 			block.count += write(1, &format[i], 1);
-			// printf ("printing char - %c\n", format[i]);
-			// printf ("I  - %i\n", i);
-			// printf ("Block count - %d\n", block.count);
+			printf ("printing char - %c\n", format[i]);
+			printf ("I  - %i\n", i);
+			printf ("Block count - %d\n", block.count);
 		}
 	}
 	va_end(arg_list);
