@@ -83,10 +83,10 @@ int main()
 {
 	int i = 0;
 
-		// i = printf("%010c\n", 65);
+		// i = printf("\n%10c\n", 65);
 		// printf ("i in printf %d\n", i);
-		i = ft_printf("%10c %s", 65, "hello world");
-		// printf ("i in ft_printf %d\n", i);
+		i = ft_printf("hell %10c this %10c", 65, 66);
+		// printf ("\ni in ft_printf %d\n", i);
 		
 		
 		// i = printf("%-10c\n", 65);

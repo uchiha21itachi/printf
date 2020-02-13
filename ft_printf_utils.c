@@ -29,15 +29,20 @@ int	check_specifier(char c)
 	char 	*str;
 	
 	str = "sciduxXp";
-	printf ("format - %c", c);
+	// printf ("format - %c", c);
 	while (*str)
 	{
 		if (*str == c)
-			return (1);
+		{
+			// printf ("check specifier returns - %c", *str);
+			return (0);
+		}
 		str++;
 	}
-	return (0);
+	// printf ("check specifier returns - 0");
+	return (1);
 }
+
 void	print_block(f_list block)
 {
 	printf ("\nPrinting all the values of block\n");

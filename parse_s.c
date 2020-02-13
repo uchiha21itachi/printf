@@ -16,11 +16,9 @@
 f_list	parse_s(f_list block, const char *format, int i, va_list arg_list)
 {
 	char *s;
-	int k;
 
-	// printf ("\n\n\n");
-	k = 0;
+	printf ("\n\n\n");
 	s = va_arg(arg_list, char *);
-	// printf ("%s", s);
+		// printf ("%s", s);
 	return (block);
 }
