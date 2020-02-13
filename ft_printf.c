@@ -26,7 +26,8 @@ f_list		set_init_data(f_list block)
 
 f_list		parse_flags(f_list block, const char *format, int i)
 {
-	while (check_specifier(format[++i]) && format[i] != '\0')
+	// printf ("format[i] at the start of parse flags = %c and i = %d\n", format[i], i);
+	while ((check_specifier(format[++i]) == 1) && format[i] != '\0')
 	{
 		while (is_flag(format[i]))
 			block = update_flags(format[i++], block);
@@ -35,7 +36,6 @@ f_list		parse_flags(f_list block, const char *format, int i)
 		if (format[i] == '.')
 		{
 			block.p_avail = 1;
-			block.precision = 0;
 			i++;
 			while (is_flag(format[i]))
 				block = update_flags(format[i++], block);
@@ -43,29 +43,24 @@ f_list		parse_flags(f_list block, const char *format, int i)
 				block.precision = (block.precision * 10) + (format[i++] - 48);
 		}
 	}
+	// printf ("format[i] at the end of parse flags = %c and i = %d\n", format[i], i);
 	return (block);
 }
 
 f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 {
+	printf ("\n1-11-1-1-1-1-1-1-1-\n");
 	while (format[i] != '\0')
 	{
 		if (format[i] == 's')
+		{
 			block = parse_s(block, &format[0], i, arg_list);
-		// else if (format[i] == 'd')
-			// block = parse_d(block, &format[0], i, arg_list);
-		// else if (format[i] = 'i')
-		// 	block = parse_i(&format[0], block, i, arg_list);
+		}
 		else if (format[i] == 'c')
+		{
 			block = parse_c(block, &format[0], i, arg_list);
-		// else if (format[i] = 'p')
-		// 	block = parse_p(&format[0], block, i, arg_list);
-		// else if (format[i] = 'x')
-		// 	block = parse_x(&format[0], block, i, arg_list);
-		// else if (format[i] = 'X')
-		// 	block = parse_X(&format[0], block, i, arg_list);
-		// else if (format[i] = 'u')
-		// 	block = parse_u(&format[0], block, i, arg_list);
+			break;
+		}
 		i++;
 	}
 	return (block);
@@ -74,9 +69,11 @@ f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 f_list		set_data(f_list block, int i, const char *format, va_list arg_list)
 {
 	block = set_init_data(block);
-	block = check_stars(block, &format[0], arg_list);
-	block = parse_flags(block, &format[0], i);
-	block = parse(block, &format[0], i, arg_list);
+	block = check_stars(block, format, i, arg_list);
+	block = parse_flags(block, format, i);
+	// block = parse(block, &format[0], i, arg_list);
+	print_block(block);
+
 	return (block);
 }
 
@@ -95,16 +92,11 @@ int			ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			if (format[i + 1] == '%' && (i = i + 1))
-				block.count += write(1, "%", 1);
-			block = set_data(block, i, &format[0], arg_list);
-			while (check_specifier(format[i]))
-				i++;
+					block.count += write(1, "%", 1);	
+			block = set_data(block, i, format, arg_list);
 		}
 		else
-		{
-			// printf("%d\n", i);
 			block.count += write(1, &format[i], 1);
-		}
 	}
 	va_end(arg_list);
 	return (block.count);

@@ -43,7 +43,7 @@ f_list		parse(f_list block, const char *format, int i, va_list arg_list);
 
 f_list		update_flags(char c, f_list block);
 int			is_flag(char c);
-f_list		check_stars(f_list block, const char *format, va_list arg_list);
+f_list		check_stars(f_list block, const char *format, int i, va_list arg_list);
 
 /*printing functions in ft_printf_utils */
 

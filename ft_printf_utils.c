@@ -29,17 +29,17 @@ int	check_specifier(char c)
 	char 	*str;
 	
 	str = "sciduxXp";
-	// printf ("format - %c", c);
+	// printf ("%d", c);
 	while (*str)
 	{
 		if (*str == c)
 		{
-			// printf ("check specifier returns - %c", *str);
+		// printf ("check specifier returns - 0 for char - %c\n", c);
 			return (0);
 		}
 		str++;
 	}
-	// printf ("check specifier returns - 0");
+	// printf ("check specifier returns - 1 for char - %c\n", c);
 	return (1);
 }
 
