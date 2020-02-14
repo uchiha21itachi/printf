@@ -70,7 +70,7 @@ f_list		set_data(f_list block, int i, const char *format, va_list arg_list)
 {
 	block = set_init_data(block);
 	block = check_stars(block, format, i, arg_list);
-	block = parse_flags(block, format, i);
+	// block = parse_flags(block, format, i);
 	// block = parse(block, &format[0], i, arg_list);
 	print_block(block);
 
