@@ -18,19 +18,19 @@ f_list	parse_c(f_list block, const char *format, int i, va_list arg_list)
 	int c;
 
 	c = va_arg(arg_list, int);
-	printf ("\n this is character %c", c);
-	// space_count = 0;
-	// if (block.minus_flag)
-	// {
-	// 	block.count += write(1, &c, 1);
-	// 	while (space_count++ < (block.width - 1))
-	// 		block.count += write(1, " ", 1);
-	// }
-	// else
-	// {
-	// 	while (space_count++ < (block.width - 1))
-	// 		block.count += write(1, " ", 1);
-	// 	block.count += write(1, &c, 1);
-	// }
+	// printf ("\n this is character %c", c);
+	space_count = 0;
+	if (block.minus_flag)
+	{
+		block.count += write(1, &c, 1);
+		while (space_count++ < (block.width - 1))
+			block.count += write(1, " ", 1);
+	}
+	else
+	{
+		while (space_count++ < (block.width - 1))
+			block.count += write(1, " ", 1);
+		block.count += write(1, &c, 1);
+	}
 	return (block);
 }

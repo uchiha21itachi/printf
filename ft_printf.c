@@ -26,8 +26,7 @@ f_list		set_init_data(f_list block)
 
 f_list		parse_flags(f_list block, const char *format, int i)
 {
-	// printf ("format[i] at the start of parse flags = %c and i = %d\n", format[i], i);
-	while ((check_specifier(format[++i]) == 1) && format[i] != '\0')
+	while (is_specifier(format[++i]))
 	{
 		while (is_flag(format[i]))
 			block = update_flags(format[i++], block);
@@ -36,27 +35,24 @@ f_list		parse_flags(f_list block, const char *format, int i)
 		if (format[i] == '.')
 		{
 			block.p_avail = 1;
-			i++;
-			while (is_flag(format[i]))
-				block = update_flags(format[i++], block);
-			while (ft_isdigit(format[i]))
-				block.precision = (block.precision * 10) + (format[i++] - 48);
+			while (ft_isdigit(format[++i]))
+				block.precision = (block.precision * 10) + (format[i] - 48);
+			i--;
 		}
 	}
-	// printf ("format[i] at the end of parse flags = %c and i = %d\n", format[i], i);
 	return (block);
 }
 
 f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 {
-	printf ("\n1-11-1-1-1-1-1-1-1-\n");
 	while (format[i] != '\0')
 	{
 		if (format[i] == 's')
 		{
+			// printf ("no\n");
 			block = parse_s(block, &format[0], i, arg_list);
 		}
-		else if (format[i] == 'c')
+		if (format[i] == 'c')
 		{
 			block = parse_c(block, &format[0], i, arg_list);
 			break;
@@ -70,9 +66,9 @@ f_list		set_data(f_list block, int i, const char *format, va_list arg_list)
 {
 	block = set_init_data(block);
 	block = check_stars(block, format, i, arg_list);
-	// block = parse_flags(block, format, i);
-	// block = parse(block, &format[0], i, arg_list);
-	print_block(block);
+	block = parse_flags(block, format, i);
+	block = parse(block, &format[0], i, arg_list);
+	// print_block(block);
 
 	return (block);
 }
@@ -94,6 +90,8 @@ int			ft_printf(const char *format, ...)
 			if (format[i + 1] == '%' && (i = i + 1))
 					block.count += write(1, "%", 1);	
 			block = set_data(block, i, format, arg_list);
+			while (is_specifier(format[i]))
+				i++;
 		}
 		else
 			block.count += write(1, &format[i], 1);
