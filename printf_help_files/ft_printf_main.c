@@ -1,105 +1,138 @@
 #include "../ft_printf.h"
 
-void	test1(void)
+
+void	s_conversion(void)
 {
-	// char	str[30] = "Hell yeah"™;
-	// ft_printf("print this %0-12.034s\n", str);
-	//precision > width
-	//1.1 precision > num_length && width > num_length	
-	ft_printf ("%10.15d\n", 12203);
-	//1.2 precision < num_length && width < num_length	
-	ft_printf ("%2.4d\n", 12203);
-	//1.3 precision > num_length && width < num_length	
-	ft_printf ("%2.10d\n", 12203);
-	ft_printf("-----------------------------------\n");
+	int i;
+
+	i = 0;
+	//precision > width 
+	
+	//1.1 precision > length && width > length 
+	//out_len = width 
+	i = printf ("%-20.30s\n", "Hello world!!");	
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-20.30s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
+	
+	//1.2 precision > length && width < length
+	//out_len = len #
+	i = printf ("%-5.30s\n", "Hello world!!");
+	printf ("i - %d\n", i);	
+	i = ft_printf ("%-5.30s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
+	
+	//1.3 precision > length && width = length
+	//out_len = len #
+	i = printf ("%-13.30s\n", "Hello world!!");	
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-13.30s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
+	
+	//1.4 precision < length && width < length 
+	// out_len = precision
+	i = printf ("%-9.10s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-9.10s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
+
+	//1.5 precision = length && width < length
+	// out_len = precision
+	i = printf ("%-9.13s\n", "Hello world!!");
+	printf ("i - %d\n", i);	
+	i = ft_printf ("%-9.13s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
+
+printf ("-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
 
 	//width > precision
-	//2.1 precision > num_length && width > num_length	
-	ft_printf ("%15.10d\n", 12203);
-	//2.2 precision < num_length && width < num_length	
-	ft_printf ("%4.2d\n", 12203);	
-	//2.3 precision < num_length && width > num_length	
-	ft_printf ("%10.2d\n", 12203);	
-	ft_printf("-----------------------------------\n");
+	//2.1 precision > length && width > length
+	i = printf ("%-20.15s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-20.15s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
 
-	//width == precision
-	//3.1 precision > num_length && width > num_length	
-	ft_printf ("%10.10d\n", 12203);
-	//3.2 precision < num_length && width < num_length	
-	ft_printf ("%4.4d\n", 12203);
-	ft_printf("-----------------------------------\n");
+	//2.2 precision < length && width > length
+	i = printf ("%-20.10s\n", "Hello world!!");	
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-20.10s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
 
-	//with only width
-	//4.1 width greater than number length
-	ft_printf ("%10d\n", 12203);
-	//4.1 width less than number length
-	ft_printf ("%4d\n", 12203);
-	ft_printf("-----------------------------------\n");
-}
+	//2.3 precision = length && width > length	
+	i = printf ("%-20.13s\n", "Hello world!!");	
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-20.13s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
 
-void	test2(void)
-{
-	//precision > width
-	//1.1 precision > num_length && width > num_length	
-	ft_printf ("%-10.015d\n", 12203);
-	//1.2 precision < num_length && width < num_length	
-	ft_printf ("%-2.-4d\n", 12203);
-	//1.3 precision > num_length && width < num_length	
-	ft_printf ("%-020.0010d\n", 12203);
-	ft_printf("-----------------------------------\n");
+	//2.4  preciosion < len && width == length
+	i = printf ("%-13.10s\n", "Hello world!!");	
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-13.10s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
 
-	//width > precision
-	//2.1 precision > num_length && width > num_length	
-	ft_printf ("%-15.10d\n", 12203);
-	//2.2 precision < num_length && width < num_length	
-	ft_printf ("%-4.2d\n", 12203);
-	//2.3 precision < num_length && width > num_length	
-	ft_printf ("%-10.2d\n", 12203);	
-	ft_printf("-----------------------------------\n");
+	//2.5  preciosion = len && width == length
+	i = printf ("%-13.13s\n", "Hello world!!");	
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-13.13s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
 
-	//width == precision
-	//3.1 precision > num_length && width > num_length	
-	ft_printf ("%-10.10d\n", 12203);
-	//3.2 precision < num_length && width < num_length	
-	ft_printf ("%-4.4d\n", 12203);
-	ft_printf("-----------------------------------\n");
+	//2.3 precision < length && width < length 
+	i = printf ("%-10.5s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-10.5s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
 
-	//with only width
-	//4.1 width greater than number length
-	ft_printf ("%-10d\n", 12203);
-	//4.1 width less than number length
-	ft_printf ("%-4d\n", 12203);
-	ft_printf("-----------------------------------\n");
+printf ("-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
 
-	//with only precision
-	//5.1 precision greater than number length
-	ft_printf ("%-.10d\n", 12203);
-	//5.2 precision less than number length
-	ft_printf ("%-.4d\n", 12203);
-	ft_printf("-----------------------------------\n");
+	// width == precision
+	// 3.1. width > length && precision > length	
+	i = printf ("%-30.30s\n", "Hello world!!");	
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-30.30s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
+
+	// 3.2 width < length && precision < length 
+	i = printf ("%-10.10s\n", "Hello world!!");	
+	printf ("i - %d\n", i);
+	i = ft_printf ("%-10.10s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
+
+	// 3.3 width == len && precision == width
+	i = printf ("%-13.13s\n", "Hello world!!");	
+	printf ("i - %d\n", i);	
+	i = ft_printf ("%-13.13s\n", "Hello world!!");
+	printf ("i - %d\n", i);
+	printf ("-----------------------------------\n");
+
+printf ("-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
 }
 
 int main()
 {
 	int i = 0;
 
-		// i = printf("\n%10c\n", 65);
-		// printf ("i in printf %d\n", i);
-		// printf ("string to print\n");
-		// i = printf("hell %10c this %2c\n\n\n", 65, 66);
-		// i = ft_printf("hell %*.10c this %2c", 10, 65, 66);
-		// printf ("\ni in ft_printf %d\n", i);
-		
-		ft_printf("Hello world %-*.10c %21c helppp ", 23, 65, 65);
-		// i = printf("%-10c\n", 65);
-		// printf ("i in printf %d\n", i);
-		// i = ft_printf("%-10c\n", 65);
-		// printf ("i in ft_printf %d\n", i);
-		
-		
-		// i = printf("%*c\n", 62, 65);
-		// printf ("i in printf %d \n", i);		
-		// i = ft_printf("%*c\n", 62, 65);
-		// printf ("i in ft_printf %d\n", i);
+		s_conversion();
+		// ft_printf("Hello world %-*.*c %21c helppp ",25, 50, 65, 65);
+		// printf("|Hello world %-*c %*c helppp|\n", 23, 65, 21, 65);
+		// ft_printf("|Hello world %-*c %*c helppp|\n", 23, 65, 21, 65);
+		// printf ("|please i am a string = %10s|\n", "Its me me me");
+//		// ft_printf ("|please i am a string = %10s|\n", "Its me me me");
+		// ft_printf("Hello world %-0391.*s %21.*c helppp ", 23, 100,  65, 65);
+		// ft_printf("Hello world %-0391.23s %21.42c hell \n",65, 65);
+		// ft_printf("Hello world %-0391.23s %21.52c lodaa \n",65, 65);
+		// ft_printf("Hello world %-0391.23s %.21c helppp \n",65, 65);
 
 }

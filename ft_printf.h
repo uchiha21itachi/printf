@@ -50,14 +50,15 @@ f_list		check_stars(f_list block, const char *format, int i, va_list arg_list);
 void		ft_putchar(char c);
 int			ft_isdigit(int c);
 void		print_block(f_list block);
-int			check_specifier(char c);
-
-
+int			is_specifier(char c);
 
 // Functions handling string conversion in ft_printf_strings
 f_list		parse_s(f_list block, const char *format, int i, va_list arg_list);
 f_list		parse_d(f_list block, const char *format, int i, va_list arg_list);
 f_list		parse_c(f_list block, const char *format, int i, va_list arg_list);
 
+//Utils from libft in ft_printf_libft_utils
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(char *s1);
 
 #endif

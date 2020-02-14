@@ -24,22 +24,17 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	check_specifier(char c)
+int	is_specifier(char c)
 {
 	char 	*str;
 	
 	str = "sciduxXp";
-	// printf ("%d", c);
 	while (*str)
 	{
 		if (*str == c)
-		{
-		// printf ("check specifier returns - 0 for char - %c\n", c);
 			return (0);
-		}
 		str++;
 	}
-	// printf ("check specifier returns - 1 for char - %c\n", c);
 	return (1);
 }
 
