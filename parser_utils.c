@@ -18,7 +18,7 @@ f_list		update_flags(char c, f_list block)
 
 f_list		check_stars(f_list block, const char *format, int i, va_list arg_list)
 {
-	while (format[++i] != '\0' && is_specifier(format[i]))
+	while (format[++i] != '\0' && (!(is_specifier(format[i]))))
 	{
 		if (format[i] == '.')
 		{

@@ -32,10 +32,10 @@ int	is_specifier(char c)
 	while (*str)
 	{
 		if (*str == c)
-			return (0);
+			return (1);
 		str++;
 	}
-	return (1);
+	return (0);
 }
 
 void	print_block(f_list block)

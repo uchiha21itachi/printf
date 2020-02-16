@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-f_list	parse_c(f_list block, const char *format, int i, va_list arg_list)
+f_list	parse_c(f_list block, va_list arg_list)
 {
 	int space_count;
 	int c;
