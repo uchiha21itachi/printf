@@ -132,3 +132,57 @@ heirarchy of power:
 
 // Number of position before decimal point is called 'Width'
 // Number of position after decimal point is called the precision
+
+
+
+
+// Spaces count for String
+
+
+	if (block.precision >= len)
+		str_print_len = len;
+	else if (block.precision < len)
+		str_print_len = block.precision;
+
+//wid <= printlen then spaces = 0
+//wid > printlen then 
+	//width <= precision
+		//spaces = width - print_len
+	//width > precision
+		// precision > len
+			// spaces = width - len
+		// precision < len
+			// spaces = width - precision
+
+
+
+
+
+
+//
+int		cal_spaces(int len, f_list block)
+{
+	int spaces;
+	int str_print_len;
+
+	if (block.precision >= len)
+		str_print_len = len;
+	else if (block.precision < len)
+		str_print_len = block.precision;
+
+	if (block.width <= str_print_len)
+		spaces = 0;
+	else if (block.width > str_print_len)
+	{
+		if (block.width <= block.precision)
+			spaces = block.width - str_print_len;
+		else if (block.width > block.precision)
+		{
+			if (block.precision >= len)
+				spaces = block.width - len;
+			else if (block.precision < len)
+				spaces = block.width - block.precision;
+		}
+	}
+	return (spaces);
+}

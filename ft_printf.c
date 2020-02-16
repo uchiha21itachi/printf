@@ -14,6 +14,7 @@
 
 f_list		set_init_data(f_list block)
 {
+
 	block.precision = 0;
 	block.p_avail = 0;
 	block.p_star = 0;
@@ -26,7 +27,7 @@ f_list		set_init_data(f_list block)
 
 f_list		parse_flags(f_list block, const char *format, int i)
 {
-	while (is_specifier(format[++i]))
+	while (!(is_specifier(format[i++])))
 	{
 		while (is_flag(format[i]))
 			block = update_flags(format[i++], block);
@@ -35,6 +36,8 @@ f_list		parse_flags(f_list block, const char *format, int i)
 		if (format[i] == '.')
 		{
 			block.p_avail = 1;
+			if (!(ft_isdigit(format[i + 1])))
+				block.precision = 0;
 			while (ft_isdigit(format[++i]))
 				block.precision = (block.precision * 10) + (format[i] - 48);
 			i--;
@@ -45,16 +48,17 @@ f_list		parse_flags(f_list block, const char *format, int i)
 
 f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 {
+	
 	while (format[i] != '\0')
-	{
+	{	
 		if (format[i] == 's')
 		{
-			// printf ("no\n");
-			block = parse_s(block, &format[0], i, arg_list);
+			block = parse_s(block, arg_list);
+			break;
 		}
-		if (format[i] == 'c')
+		else if (format[i] == 'c')
 		{
-			block = parse_c(block, &format[0], i, arg_list);
+			block = parse_c(block, arg_list);
 			break;
 		}
 		i++;
@@ -68,7 +72,6 @@ f_list		set_data(f_list block, int i, const char *format, va_list arg_list)
 	block = check_stars(block, format, i, arg_list);
 	block = parse_flags(block, format, i);
 	block = parse(block, &format[0], i, arg_list);
-	// print_block(block);
 
 	return (block);
 }
@@ -78,7 +81,6 @@ int			ft_printf(const char *format, ...)
 	va_list			arg_list;
 	int				i;
 	f_list			block;
-	int				k;
 
 	i = -1;
 	block.count = 0;
@@ -88,9 +90,9 @@ int			ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			if (format[i + 1] == '%' && (i = i + 1))
-					block.count += write(1, "%", 1);	
+					block.count += write(1, "%", 1);
 			block = set_data(block, i, format, arg_list);
-			while (is_specifier(format[i]))
+			while (!(is_specifier(format[i])))
 				i++;
 		}
 		else
