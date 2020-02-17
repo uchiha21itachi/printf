@@ -12,181 +12,76 @@
 
 #include "ft_printf.h"
 
-// int		cal_output_len(f_list block, int len, int output_len)
-// {
-// 	if (block.precision > block.width)
-// 	{
-// 		if (block.precision > len && block.width <= len)
-// 			output_len = len;
-// 		else if (block.precision > len && block.width > len)
-// 			output_len = block.width;
-// 		else if (block.precision <= len && block.width < len)
-// 			output_len = block.precision;	
-// 	}
-// 	else if (block.width > block.precision) 
-// 			output_len = block.width;
-// 	else if (block.width == block.precision)
-// 	{
-// 		if (block.precision > len)
-// 			output_len = block.width;
-// 		else if (block.precision < len)
-// 			output_len = block.precision;
-// 		else if (block.precision == len)
-// 			output_len = len;
-// 	}
-// 	return (output_len);
-// }
-
-int		cal_str_output_len(f_list block, int len)
+char	*create_null_str(void)
 {
-	int str_print_len;
+	char *s;
 
-	str_print_len = 0;
-	if (block.precision >= len && block.precision != 0)
-		str_print_len = len;
-	else if (block.precision < len && block.precision != 0)
-		str_print_len = block.precision;
-	else if (block.width && block.precision == 0)
-		str_print_len = len;
-	return (str_print_len);
+	s = (char *)malloc(7 * sizeof (char));
+	s[0] = '(';
+	s[1] = 'n';
+	s[2] = 'u';
+	s[3] = 'l';
+	s[4] = 'l';
+	s[5] = ')';
+	s[6] = '\0';
+	return (s);
 }
 
-int		cal_spaces(int len, f_list block)
+char	*get_str(va_list arg_list, f_list block)
 {
-	int spaces;
-	int str_print_len;
+	char	*str;
+	int		i;
 
-	str_print_len = cal_str_output_len(block, len);
-	spaces = 0;
-	if (block.width <= str_print_len)
-		spaces = 0;
-	else if (block.width > str_print_len)
+	i = 0;
+	str = va_arg(arg_list, char *);
+	if (str == NULL)
+		str = create_null_str();
+	else
+		str = ft_strdup(str);
+	if (block.p_avail)
 	{
-		if (block.width <= block.precision)
-			spaces = block.width - str_print_len;
-		else if (block.width > block.precision)
+		if (block.precision <= 0)
+			str[0] = '\0';
+		else if (block.precision < ft_strlen(str))
 		{
-			if (block.precision >= len)
-				spaces = block.width - len;
-			else if (block.precision < len)
-				spaces = block.width - block.precision;
+			while (i < block.precision)
+				i++;
+			str[i] = '\0';
 		}
 	}
-	return (spaces);
+	return (str);
 }
 
-int		cal_spaces_only_one(f_list block, int len)
+f_list		print_string(char *str, f_list block, int spaces)
 {
-	int spaces;
-	int	str_output_len;
+	int i;
 
-	spaces = 0;
-	str_output_len = cal_str_output_len(block, len);
-	if (block.width)
-	{
-		if (block.width > str_output_len)
-			spaces = block.width - str_output_len; 
-	}
-	return (spaces);
-}
-
-f_list		print_string(char *str, int len,  int spaces, f_list block)
-{
-	int		str_print_len;
-	int		counter;
-
-	counter = 0;
-	str_print_len = cal_str_output_len(block, len);
+	i = 0;
 	if (block.minus_flag)
 	{
-		block.count += ft_putstr(str, str_print_len);
-		while (counter++ < spaces)
+		block.count += ft_putstr(str, ft_strlen(str));
+		while (i++ < spaces)
 			block.count += write(1, " ", 1);
 	}
 	else
 	{
-		while (counter++ < spaces)
+		while (i++ < spaces)
 			block.count += write(1, " ", 1);
-		block.count += ft_putstr(str, str_print_len);	
+		block.count += ft_putstr(str, ft_strlen(str));
 	}
 	return (block);
 }
-
 
 f_list		parse_s(f_list block, va_list arg_list)
 {
-	char	*str;
-	int		len;
-	int		spaces;
-	int		output_len;
+	char *str;
+	char spaces;
 
-	output_len = 0;
-	
-	if ((str = ft_strdup(va_arg(arg_list, char *))) == 0)
-		write(1, "Error in allocating memory from malloc\n", 39);
-	
-	len = ft_strlen(str);
-	if (block.p_avail == 1 && block.precision == 0)
-	{
-		block.count += write(1, "", 0);
-		return (block);
-	}
-	if (*str == '\0')
-	{
-		block.count += write(1, "(null)", 6);
-		return (block);
-	}
-	if (block.width && block.precision)
-	{
-		spaces = cal_spaces(len, block);
-		block = print_string(str, len, spaces, block);
-	}
-	else if ((block.width && block.precision == 0) || (block.precision && block.width == 0))
-	{
-		spaces = cal_spaces_only_one(block, len);
-		block = print_string(str, len, spaces, block);
-	}
+	str = get_str(arg_list, block);
+	if (block.width > ft_strlen(str))
+		spaces = block.width - ft_strlen(str);
 	else
-		block.count += ft_putstr(str, len);
-	free (str);
+		spaces =  0;
+	block = print_string(str, block, spaces);
 	return (block);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 	if(output_length == len)
-// 	{
-// 		printf("block width - %d\n", block.width);
-// 		printf("block precision - %d\n", block.precision);
-// 		printf ("output len - length\n");
-// 	}
-// 	else if (output_length == block.width)
-// 	{
-// 		printf("block width - %d\n", block.width);
-// 		printf("block precision - %d\n", block.precision);
-// 		printf("output len - block width\n");
-// 	}
-// 	else if (output_length == block.width)
-// 	{
-// 		printf("block width - %d\n", block.width);
-// 		printf("block precision - %d\n", block.precision);
-// 		printf("output len - block precision\n");
-// 	}

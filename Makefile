@@ -24,6 +24,7 @@ ft_printf_libft_utils.c \
 parser_utils.c \
 parse_c.c \
 parse_s.c \
+parse_p.c \
 
 
 OBJS = $(SRCS:.c=.o)

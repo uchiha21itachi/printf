@@ -188,26 +188,28 @@ void	s_conversion_with_flag1(void)
 
 	//precision > width 
 	//1.1 precision > length && width > length  
-	printf ("%-20.30s\n", "Hello world!!");
+	printf ("%020.30s\n", "Hello world!!");
 	//1.2 precision > length && width < length  
-	printf ("%-5.30s\n", "Hello world!!");
+	printf ("%05.30s\n", "Hello world!!");
 	//1.3 precision < length && width < length 
-	printf ("%-9.10s\n", "Hello world!!");
+	printf ("%09.10s\n", "Hello world!!");
 	
 	//width > precision
 	//2.1 precision > length && width > length
-	printf ("%-20.15s\n", "Hello world!!");
+	printf ("%020.15s\n", "Hello world!!");
 	//2.2 precision < length && width > length
-	printf ("%-20.10s\n", "Hello world!!");
+	printf ("%020.10s\n", "Hello world!!");
 	//2.3 precision < length && width < length 
-	printf ("%-10.5s\n", "Hello world!!");
+	printf ("%010.5s\n", "Hello world!!");
 	
 	//width == precision
 	//3.1. width > length && precision > length 
-	printf ("%-30.30s\n", "Hello world!!");
+	printf ("%030.30s\n", "Hello world!!");
 	//3.2 width < length && precision < length 
-	printf ("%-10.10s\n", "Hello world!!");
+	printf ("%010.10s\n", "Hello world!!");
 
+	printf ("%030s\n", "hello world!!");
+	printf ("%0.30s\n", "hello world!!");
 	//conclusion - Output is same just spaces are in the end instead of start
 
 }
@@ -309,11 +311,11 @@ void	i_and_d_conversion_with_flag2(void)
 
 	//precision > width
 	//1.1 precision > num_length && width > num_length	
-	printf ("%10.15d\n", 12203);
+	printf ("%010.15d\n", 12203);
 	//1.2 precision < num_length && width < num_length	
-	printf ("%2.4d\n", 12203);
+	printf ("%02.4d\n", 12203);
 	//1.3 precision > num_length && width < num_length	
-	printf ("%2.10d\n", 12203);
+	printf ("%02.10d\n", 12203);
 	printf("-----------------------------------\n");
 
 	//width > precision
@@ -334,9 +336,9 @@ void	i_and_d_conversion_with_flag2(void)
 
 	//only width
 	//4.1 width greater than number length
-	printf ("%10d\n", 12203);
+	printf ("%010d\n", 12203);
 	//4.2 width less than number length
-	printf ("%3d\n", 12203);
+	printf ("%03d\n", 12203);
 	printf("-----------------------------------\n");
 
 	//only precision

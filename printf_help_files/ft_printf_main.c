@@ -151,10 +151,14 @@ void	s_conversion(void)
 int main()
 {
 	int i = 0;
-	i  = printf ("hello, %s", NULL);
-	printf ("\ni - %d\n",i);
-	i  = ft_printf ("hello, %s", NULL);
-	printf ("\ni - %d\n",i);
+	int x = 10;
+	unsigned long long k;
+	
+	k = (unsigned long long)&x;
+	// i  = printf ("%020s", "str");
+	// printf ("\ni - %d\n",i);
+	printf ("k = %llu\n", k);
+	i  = ft_printf ("%p", k);
+	// printf ("\ni - %d\n",i);
 	while(1);
-
 }

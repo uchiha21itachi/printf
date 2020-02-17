@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_c.c                                          :+:      :+:    :+:   */
+/*   parse_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 22:11:57 by yassharm          #+#    #+#             */
-/*   Updated: 2020/02/16 06:07:27 by yassharm         ###   ########.fr       */
+/*   Created: 2020/02/17 22:10:23 by yassharm          #+#    #+#             */
+/*   Updated: 2020/02/17 22:10:24 by yassharm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-f_list	parse_c(f_list block, va_list arg_list)
+f_list	parse_p(f_list block, va_list arg_list)
 {
-	int space_count;
-	int c;
+	unsigned long long	add;
 
-	c = va_arg(arg_list, int);
-	space_count = 0;
-	if (block.minus_flag)
-	{
-		block.count += write(1, &c, 1);
-		while (space_count++ < (block.width - 1))
-			block.count += write(1, " ", 1);
-	}
-	else
-	{
-		while (space_count++ < (block.width - 1))
-			block.count += write(1, " ", 1);
-		block.count += write(1, &c, 1);
-	}
+	add = va_arg(arg_list, unsigned long long);
+	printf ("add - %llu", add);
+	print_block(block);
 	return (block);
 }

@@ -55,6 +55,8 @@ int			is_specifier(char c);
 // Functions handling string conversion in ft_printf_strings
 f_list		parse_s(f_list block, va_list arg_list);
 f_list		parse_c(f_list block, va_list arg_list);
+f_list		parse_p(f_list block, va_list arg_list);
+
 
 //Utils from libft in ft_printf_libft_utils
 int			ft_strlen(const char *s);
@@ -64,7 +66,7 @@ int			ft_putstr(char *s, int str_print_len);
 // functions from parse_s
 int			cal_output_len(f_list block, int len, int output_len);
 int			cal_spaces(int len, f_list block);
-f_list		print_string(char *str, int len, int spaces, f_list block);
+f_list		print_string(char *str, f_list block, int spaces);
 
 
 
