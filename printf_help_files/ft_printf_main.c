@@ -150,15 +150,21 @@ void	s_conversion(void)
 
 int main()
 {
-	int i = 0;
-	int x = 10;
-	unsigned long long k;
-	
-	k = (unsigned long long)&x;
-	// i  = printf ("%020s", "str");
-	// printf ("\ni - %d\n",i);
-	printf ("k = %llu\n", k);
-	i  = ft_printf ("%p", k);
-	// printf ("\ni - %d\n",i);
+	char *str;
+
+	str = (char*)malloc(10 * sizeof(char));
+	str[0] = 'H';
+	str[1] = 'H';
+	str[2] = 'H';
+	str[3] = 'H';
+	str[4] = 'H';
+	str[5] = 'H';
+	str[6] = '\0';
+
+	// printf("%p\n", str);
+	// ft_printf("%p\n", str);
+
+	// ft_printf("%2.9p\n", 1234);
+	// printf("%2.9p\n", 1234);
 	while(1);
 }

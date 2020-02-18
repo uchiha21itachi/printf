@@ -12,12 +12,42 @@
 
 #include "ft_printf.h"
 
+char	*convert(long long num, int base, f_list block)
+{
+	static char	*representation;
+	static char	buffer[50];
+	char		*ptr;
+
+	representation = ft_strdup("0123456789abcdef");
+	ptr = &buffer[49];
+	*ptr = '\0';
+	while (1)
+	{
+		*--ptr = representation[num % base];
+		num /= base;
+		if (num == 0)
+			break ;
+	}
+	*--ptr = 'x';
+	*--ptr = '0';
+	if (ft_strlen(ptr) < 4 && block.p_avail)
+		ptr[2] = '\0';
+	free(representation);
+	return (ptr);
+}
+
 f_list	parse_p(f_list block, va_list arg_list)
 {
 	unsigned long long	add;
+	char *ptr;
+	int spaces;
 
 	add = va_arg(arg_list, unsigned long long);
-	printf ("add - %llu", add);
-	print_block(block);
+	ptr = convert(add, 16, block);
+	if (block.width > ft_strlen(ptr))
+		spaces = block.width - ft_strlen(ptr);
+	else
+		spaces = 0;
+	block = print_string(ptr, block, spaces);
 	return (block);
 }
