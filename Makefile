@@ -22,9 +22,11 @@ SRCS = ft_printf.c \
 ft_printf_utils.c \
 ft_printf_libft_utils.c \
 parser_utils.c \
+ft_itoa.c \
 parse_c.c \
 parse_s.c \
 parse_p.c \
+parse_d.c \
 
 
 OBJS = $(SRCS:.c=.o)
