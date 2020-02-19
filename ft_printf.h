@@ -57,6 +57,7 @@ f_list		parse_s(f_list block, va_list arg_list);
 f_list		parse_c(f_list block, va_list arg_list);
 f_list		parse_p(f_list block, va_list arg_list);
 f_list		parse_d(f_list block, va_list arg_list);
+f_list		parse_u(f_list block, va_list arg_list);
 
 
 //Utils from libft in ft_printf_libft_utils
