@@ -208,7 +208,7 @@ void	s_conversion_with_flag1(void)
 	//3.2 width < length && precision < length 
 	printf ("%010.10s\n", "Hello world!!");
 
-	printf ("%030s\n", "hello world!!");
+	printf ("%030s\n", "hello world!!");`
 	printf ("%0.30s\n", "hello world!!");
 	//conclusion - Output is same just spaces are in the end instead of start
 

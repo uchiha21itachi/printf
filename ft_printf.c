@@ -66,9 +66,14 @@ f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 			block = parse_p(block, arg_list);
 			break;
 		}
-		else if (format[i] == 'd')
+		else if (format[i] == 'd' || format[i] == 'i')
 		{
 			block = parse_d(block, arg_list);
+			break;
+		}
+		else if (format[i] == 'u')
+		{
+			block = parse_u(block, arg_list);
 			break;
 		}
 		i++;
