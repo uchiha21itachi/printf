@@ -72,7 +72,6 @@ f_list		print_number(f_list block, char *num, int zeros, int spaces)
 f_list		check_zeros(char *num, f_list block, int spaces)
 {
 	int zeros;
-	// int temp;
 
 	if (block.precision > ft_strlen(num))
 	{

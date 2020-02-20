@@ -72,6 +72,7 @@ f_list		print_string(char *str, f_list block, int spaces);
 
 //functions in ft_itoa
 char			*ft_itoa(int num);
+char			*ft_utoa(long num);
 
 
 #endif

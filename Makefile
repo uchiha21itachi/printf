@@ -23,6 +23,7 @@ ft_printf_utils.c \
 ft_printf_libft_utils.c \
 parser_utils.c \
 ft_itoa.c \
+ft_utoa.c \
 parse_c.c \
 parse_s.c \
 parse_p.c \
