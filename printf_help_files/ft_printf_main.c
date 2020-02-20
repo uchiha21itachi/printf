@@ -150,7 +150,6 @@ void	s_conversion(void)
 
 int main()
 {
-	ft_printf("num - %d\n", 12821);
-	printf("og - %d\n", 12821);
-	// while(1);
+	printf("%x\n", 4294967295u);
+	ft_printf("%x\n", 4294967295u);
 }

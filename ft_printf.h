@@ -58,6 +58,8 @@ f_list		parse_c(f_list block, va_list arg_list);
 f_list		parse_p(f_list block, va_list arg_list);
 f_list		parse_d(f_list block, va_list arg_list);
 f_list		parse_u(f_list block, va_list arg_list);
+f_list		parse_x(f_list block, va_list arg_list);
+f_list		parse_X(f_list block, va_list arg_list);
 
 
 //Utils from libft in ft_printf_libft_utils
@@ -73,6 +75,10 @@ f_list		print_string(char *str, f_list block, int spaces);
 //functions in ft_itoa
 char			*ft_itoa(int num);
 char			*ft_utoa(long num);
+
+f_list		check_zeros(char *num, f_list block, int spaces);
+f_list		print_number(f_list block, char *num, int zeros, int spaces);
+
 
 
 #endif

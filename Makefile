@@ -29,6 +29,8 @@ parse_s.c \
 parse_p.c \
 parse_d.c \
 parse_u.c \
+parse_x.c \
+parse_big_x.c \
 
 
 OBJS = $(SRCS:.c=.o)

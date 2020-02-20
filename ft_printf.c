@@ -76,6 +76,16 @@ f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 			block = parse_u(block, arg_list);
 			break;
 		}
+		else if (format[i] == 'x')
+		{
+			block = parse_x(block, arg_list);
+			break;
+		}
+		else if (format[i] == 'X')
+		{
+			block = parse_X(block, arg_list);
+			break;
+		}
 		i++;
 	}
 	return (block);
