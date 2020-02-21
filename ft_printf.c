@@ -48,46 +48,22 @@ f_list		parse_flags(f_list block, const char *format, int i)
 
 f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 {
-	
-	while (format[i] != '\0')
-	{	
-		if (format[i] == 's')
-		{
-			block = parse_s(block, arg_list);
-			break;
-		}
-		else if (format[i] == 'c')
-		{
-			block = parse_c(block, arg_list);
-			break;
-		}
-		else if (format[i] == 'p')
-		{
-			block = parse_p(block, arg_list);
-			break;
-		}
-		else if (format[i] == 'd' || format[i] == 'i')
-		{
-			block = parse_d(block, arg_list);
-			break;
-		}
-		else if (format[i] == 'u')
-		{
-			block = parse_u(block, arg_list);
-			break;
-		}
-		else if (format[i] == 'x')
-		{
-			block = parse_x(block, arg_list);
-			break;
-		}
-		else if (format[i] == 'X')
-		{
-			block = parse_X(block, arg_list);
-			break;
-		}
+	while (!(is_specifier(format[i])))
 		i++;
-	}
+	if (format[i] == 's')
+		block = parse_s(block, arg_list);
+	else if (format[i] == 'c')
+		block = parse_c(block, arg_list);
+	else if (format[i] == 'p')
+		block = parse_p(block, arg_list);
+	else if (format[i] == 'd' || format[i] == 'i')
+		block = parse_d(block, arg_list);
+	else if (format[i] == 'u')
+		block = parse_u(block, arg_list);
+	else if (format[i] == 'x')
+		block = parse_x(block, arg_list);
+	else if (format[i] == 'X')
+		block = parse_X(block, arg_list);
 	return (block);
 }
 
@@ -101,21 +77,37 @@ f_list		set_data(f_list block, int i, const char *format, va_list arg_list)
 	return (block);
 }
 
+int			check_mod(const char *format, int i)
+{
+	int result;
+
+	result = 0;
+	i++;
+	while (!(is_specifier(format[i])) && format[i] != '%')
+		i++;
+	if (format[i] == '%')
+		result = 1;
+	return (result);
+}
+
 int			ft_printf(const char *format, ...)
 {
 	va_list			arg_list;
 	int				i;
+	int				temp;
 	f_list			block;
 
 	i = -1;
+	temp = 0;
 	block.count = 0;
 	va_start(arg_list, format);
 	while (format[++i] != '\0')
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == '%' && (i = i + 1))
-					block.count += write(1, "%", 1);
+			temp = check_mod(format, i);
+			if (temp)
+				parse_mod(block, i, format);
 			block = set_data(block, i, format, arg_list);
 			while (!(is_specifier(format[i])))
 				i++;

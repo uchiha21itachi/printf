@@ -150,6 +150,8 @@ void	s_conversion(void)
 
 int main()
 {
-	printf("%x\n", 4294967295u);
-	ft_printf("%x\n", 4294967295u);
+	char *str  = "Hell yeah";
+	// printf("%10p %20s %d %c %d %i\n", str, "print me", 9653, 75, 2342, 223112);
+	ft_printf("%10p %20s %d %10.20% %c %d %i\n", str, "print me", 9653, 75, 2342, 223112);
+	while (1);
 }

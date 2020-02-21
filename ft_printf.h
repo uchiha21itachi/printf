@@ -60,6 +60,8 @@ f_list		parse_d(f_list block, va_list arg_list);
 f_list		parse_u(f_list block, va_list arg_list);
 f_list		parse_x(f_list block, va_list arg_list);
 f_list		parse_X(f_list block, va_list arg_list);
+f_list		parse_mod(f_list block, int i, const char *format);
+
 
 
 //Utils from libft in ft_printf_libft_utils
