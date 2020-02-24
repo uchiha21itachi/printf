@@ -78,7 +78,6 @@ f_list		parse_s(f_list block, va_list arg_list)
 	char spaces;
 
 	str = get_str(arg_list, block);
-	print_block(block);
 	if (block.width > ft_strlen(str))
 		spaces = block.width - ft_strlen(str);
 	else

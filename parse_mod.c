@@ -14,8 +14,7 @@
 
 f_list		parse_mod(f_list block, int i, const char *format)
 {
-	print_block(block);
-	while (format[i] != '%')
+	while (format[++i] != '%' && format[i] != '\0')
 	{
 		while (is_flag(format[i]))
 			block = update_flags(format[i++], block);
@@ -31,6 +30,74 @@ f_list		parse_mod(f_list block, int i, const char *format)
 			i--;
 		}
 	}
-	print_block(block);
+	return (block);
+}
+
+f_list		check_mod_stars(f_list block, const char *format, int i, va_list arg_list)
+{
+	while (format[++i] != '%' && format[i] != '\0')
+	{
+		if (format[i] == '.')
+		{
+			i++;
+			if (format[i] == '*')
+			{
+				block.p_star = 1;
+				block.precision = va_arg(arg_list, int);
+			}
+		}
+		else if (format[i] == '*')
+		{	
+			block.w_star = 1;
+			block.width = va_arg(arg_list, int);
+		}
+	}		
+	return (block);
+}
+
+f_list		print_mod(f_list block, int i, const char *format, va_list arg_list)
+{
+	int		spaces;
+
+	spaces = 0;
+	// (void)(i);
+	// (void)(format);
+	// (void)(arg_list);
+	block = set_init_data(block);
+	block = parse_mod(block, i, format);	
+	block = check_mod_stars(block, format, i, arg_list);
+	if (block.width > 1)
+		spaces = block.width - 1;
+	if (block.minus_flag)
+	{
+		if (block.zero_flag)
+		{
+			block.count += write(1, "%", 1);
+			while (spaces-- > 0)
+				block.count += write(1, "0", 1);
+		}
+		else
+		{
+			block.count += write(1, "%", 1);
+			while (spaces-- > 0)
+				block.count += write(1, " ", 1);
+		}
+	}
+	else
+	{
+		if (block.zero_flag)
+		{
+			while (spaces-- > 0)
+				block.count += write(1, "0", 1);
+			block.count += write(1, "%", 1);
+
+		}
+		else
+		{
+			while (spaces-- > 0)
+				block.count += write(1, " ", 1);
+			block.count += write(1, "%", 1);
+		}
+	}
 	return (block);
 }

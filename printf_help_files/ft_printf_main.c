@@ -151,7 +151,7 @@ void	s_conversion(void)
 int main()
 {
 	char *str  = "Hell yeah";
-	// printf("%10p %20s %d %c %d %i\n", str, "print me", 9653, 75, 2342, 223112);
-	ft_printf("%10p %20s %d %10.20% %c %d %i\n", str, "print me", 9653, 75, 2342, 223112);
-	while (1);
+	int i = printf("yo - %10p %20s %d %c %d %i %% %010%\n", str, "print me", 9653, 75, 2342, 223112);
+	int j = ft_printf("my - %10p %20s %d %c %d %i %% %010%\n", str, "print me", 9653, 75, 2342, 223112);
+	printf ("my return - %d your return - %d", j, i);
 }
