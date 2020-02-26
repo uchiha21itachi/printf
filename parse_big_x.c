@@ -35,5 +35,6 @@ f_list		parse_X(f_list block, va_list arg_list)
 	else
 		spaces = 0;
 	block = check_zeros(str, block, spaces);
+	// free(str);
 	return (block);
 }

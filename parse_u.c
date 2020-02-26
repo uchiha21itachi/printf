@@ -106,5 +106,6 @@ f_list		parse_u(f_list block, va_list arg_list)
 	else
 		spaces = 0;
 	block = check_zeros_u(num, block, spaces);
+	// free (num);
 	return (block);
 }

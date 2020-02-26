@@ -82,7 +82,13 @@ int			check_mod(const char *format, int i)
 	int result;
 
 	result = 0;
-	i++;
+	if (format[i + 1] != '\0')
+		i++;
+	else
+	{
+		result = -1;
+		return (result);
+	}
 	while (!(is_specifier(format[i])) && format[i] != '%' && format[i] != '\0')
 		i++;
 	if (format[i] == '%')
@@ -105,21 +111,16 @@ int			ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{	
-			// printf ("\ninside IF format[%d] - %c\n", i, format[i]);
 			temp = check_mod(format, i);
-			if (temp)
-				print_mod(block, i, format, arg_list);
+			if (temp == 1)
+				block = print_mod(block, i, format, arg_list);
 			else
 				block = set_data(block, i, format, arg_list);
 			while ((!(is_specifier(format[++i])) && (format[i] != '%')));
-			// printf ("\nEXIT IF format[%d] - %c\n", i, format[i]);
-
 		}
 		else
-		{
-			// printf ("\ninside ELSE format[%d] - %c\n", i, format[i]);
 			block.count += write(1, &format[i], 1);
-		}
+		
 	}
 	va_end(arg_list);
 	return (block.count);

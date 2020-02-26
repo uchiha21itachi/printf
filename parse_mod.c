@@ -33,25 +33,66 @@ f_list		parse_mod(f_list block, int i, const char *format)
 	return (block);
 }
 
-f_list		check_mod_stars(f_list block, const char *format, int i, va_list arg_list)
+f_list		check_mod_stars(f_list block, const char *str, int i, va_list a_l)
 {
-	while (format[++i] != '%' && format[i] != '\0')
+	while (str[++i] != '%' && str[i] != '\0')
 	{
-		if (format[i] == '.')
+		if (str[i] == '.')
 		{
 			i++;
-			if (format[i] == '*')
+			if (str[i] == '*')
 			{
 				block.p_star = 1;
-				block.precision = va_arg(arg_list, int);
+				block.precision = va_arg(a_l, int);
 			}
 		}
-		else if (format[i] == '*')
-		{	
+		else if (str[i] == '*')
+		{
 			block.w_star = 1;
-			block.width = va_arg(arg_list, int);
+			block.width = va_arg(a_l, int);
 		}
-	}		
+	}
+	return (block);
+}
+
+f_list		print_with_mf(f_list block, int spaces)
+{
+	int j;
+
+	j = 0;
+	if (block.zero_flag)
+	{
+		block.count += write(1, "%", 1);
+		while (j++ < spaces)
+			block.count += write(1, "0", 1);
+	}
+	else
+	{
+		block.count += write(1, "%", 1);
+		while (j++ < spaces)
+			block.count += write(1, " ", 1);
+	}
+	return (block);
+}
+
+f_list		print_without_mf(f_list block, int spaces)
+{
+	int j;
+
+	j = 0;
+	if (block.zero_flag)
+	{
+		while (j++ < spaces)
+			block.count += write(1, "0", 1);
+		block.count += write(1, "%", 1);
+
+	}
+	else
+	{
+		while (j++ < spaces)
+			block.count += write(1, " ", 1);
+		block.count += write(1, "%", 1);
+	}
 	return (block);
 }
 
@@ -60,44 +101,14 @@ f_list		print_mod(f_list block, int i, const char *format, va_list arg_list)
 	int		spaces;
 
 	spaces = 0;
-	// (void)(i);
-	// (void)(format);
-	// (void)(arg_list);
 	block = set_init_data(block);
-	block = parse_mod(block, i, format);	
+	block = parse_mod(block, i, format);
 	block = check_mod_stars(block, format, i, arg_list);
 	if (block.width > 1)
 		spaces = block.width - 1;
 	if (block.minus_flag)
-	{
-		if (block.zero_flag)
-		{
-			block.count += write(1, "%", 1);
-			while (spaces-- > 0)
-				block.count += write(1, "0", 1);
-		}
-		else
-		{
-			block.count += write(1, "%", 1);
-			while (spaces-- > 0)
-				block.count += write(1, " ", 1);
-		}
-	}
+		block = print_with_mf(block, spaces);
 	else
-	{
-		if (block.zero_flag)
-		{
-			while (spaces-- > 0)
-				block.count += write(1, "0", 1);
-			block.count += write(1, "%", 1);
-
-		}
-		else
-		{
-			while (spaces-- > 0)
-				block.count += write(1, " ", 1);
-			block.count += write(1, "%", 1);
-		}
-	}
+		block = print_without_mf(block, spaces);
 	return (block);
 }

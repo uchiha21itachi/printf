@@ -104,5 +104,6 @@ f_list		parse_d(f_list block, va_list arg_list)
 	else
 		spaces = 0;
 	block = check_zeros(num, block, spaces);
+	free(num);
 	return (block);
 }

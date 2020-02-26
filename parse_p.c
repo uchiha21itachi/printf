@@ -49,5 +49,6 @@ f_list	parse_p(f_list block, va_list arg_list)
 	else
 		spaces = 0;
 	block = print_string(ptr, block, spaces);
+	// free (ptr);
 	return (block);
 }

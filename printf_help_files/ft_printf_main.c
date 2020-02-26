@@ -153,5 +153,39 @@ int main()
 	char *str  = "Hell yeah";
 	int i = printf("yo - %10p %20s %d %c %d %i %% %010%\n", str, "print me", 9653, 75, 2342, 223112);
 	int j = ft_printf("my - %10p %20s %d %c %d %i %% %010%\n", str, "print me", 9653, 75, 2342, 223112);
-	printf ("my return - %d your return - %d", j, i);
+	// int i = printf("%% %10% %10.30% %*.*% %-10% %05% %020.30% %-0% %.% % \n", 40, 20);
+	// int j = ft_printf("%% %10% %10.30% %*.*% %-10%  %05% %020.30% %-0% %.% \n % \n", 40, 20);
+	// int j = ft_printf ("%");
+	while (1);
+	printf ("\n\n\nmy return - %d your return - %d", j, i);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

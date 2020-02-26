@@ -83,5 +83,6 @@ f_list		parse_s(f_list block, va_list arg_list)
 	else
 		spaces =  0;
 	block = print_string(str, block, spaces);
+	free (str);
 	return (block);
 }
