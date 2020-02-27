@@ -38,6 +38,7 @@ f_list		check_stars(f_list block, const char *format, int i, va_list arg_list)
 			if (format[i] == '*')
 			{
 				block.p_star = 1;
+				block.p_avail = 1;
 				block.precision = va_arg(arg_list, int);
 			}
 		}
@@ -45,6 +46,11 @@ f_list		check_stars(f_list block, const char *format, int i, va_list arg_list)
 		{	
 			block.w_star = 1;
 			block.width = va_arg(arg_list, int);
+			if (block.width < 0)
+			{
+				block.width = -block.width;
+				block.minus_flag = 1;
+			}
 		}
 	}		
 	return (block);

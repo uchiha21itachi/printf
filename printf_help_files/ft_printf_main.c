@@ -1,163 +1,98 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
+#include <limits.h>
 #include "../ft_printf.h"
 
+#define RED "\033[1m\033[31m"
+#define GREEN "\033[1m\033[32m" 
+#define YELLOW "\033[1m\033[33m"
+#define BLUE "\033[1m\033[34m"
+#define MAGENTA "\033[1m\033[35m"
+#define CYAN "\033[1m\033[36m"
+#define WHITE "\033[1m\033[37m"
+#define RESET "\x1b[0m"
 
-void	s_conversion(void)
+// ls ../../script_test/ft_printf_tests/
+
+int god;
+int fail;
+
+
+
+void	rock_or_fail(int a, int b, int *test)	
 {
-	int i;
-
-	i = 0;
-	//precision > width 
-	
-	//1.1 precision > length && width > length 
-	//out_len = width
-	// printf ("Actual - \n"); 
-	// printf ("%-20.30s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-20.30s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-	
-	//1.2 precision > length && width < length
-	//out_len = len #
-	// printf ("Actual - \n"); 
-	// printf ("%-5.30s\n", "Hello world!!");
-	// printf ("i - %d\n", i);	
-	// printf ("My Output - \n"); 
-	ft_printf ("%-5.30s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-	
-	//1.3 precision > length && width = length
-	//out_len = len #
-	// printf ("Actual - \n"); 
-	// printf ("%-13.30s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-13.30s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-	
-	//1.4 precision < length && width < length 
-	// out_len = precision
-	// printf ("Actual - \n"); 
-	// printf ("%-8.9s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-8.9s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-	//1.5 precision = length && width < length
-	// out_len = precision
-	// printf ("Actual - \n"); 
-	// printf ("%-9.13s\n", "Hello world!!");
-	// printf ("i - %d\n", i);	
-	// printf ("My Output - \n"); 
-	ft_printf ("%-9.13s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-// // // printf ("-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
-
-	//width > precision
-	//2.1 precision > length && width > length
-	// printf ("Actual - \n"); 
-	// printf ("%-20.15s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-20.15s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-	//2.2 precision < length && width > length
-	// printf ("Actual - \n"); 
-	// printf ("%-20.10s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-20.10s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-	//2.3 precision = length && width > length	
-	// printf ("Actual - \n"); 
-	// printf ("%-20.13s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-20.13s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-	//2.4  preciosion < len && width == length
-	// printf ("Actual - \n"); 
-	// printf ("%-13.10s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-13.10s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-	//2.5  preciosion = len && width == length
-	// printf ("Actual - \n"); 
-	// printf ("%-13.13s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-13.13s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-	//2.3 precision < length && width < length 
-	// printf ("Actual - \n"); 
-	// printf ("%-10.5s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-10.5s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-// // // printf ("-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
-
-	// width == precision
-	// 3.1. width > length && precision > length	
-	// printf ("Actual - \n"); 
-	// printf ("%-30.30s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-30.30s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-	// 3.2 width < length && precision < length 
-	// printf ("Actual - \n"); 
-	// printf ("%-10.10s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);
-	// printf ("My Output - \n"); 
-	ft_printf ("%-10.10s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-	// 3.3 width == len && precision == width
-	// printf ("Actual - \n"); 
-	// printf ("%-13.13s\n", "Hello world!!");	
-	// printf ("i - %d\n", i);	
-	// printf ("My Output - \n"); 
-	ft_printf ("%-13.13s\n", "Hello world!!");
-	// printf ("i - %d\n", i);
-	// printf ("-----------------------------------\n");
-
-// // // printf ("-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x-x\n");
+	printf("\nYOURS = [%d] // PRINTF = [%d]\n", b, a);
+	if (a == b)
+	{
+		printf(GREEN "\n%d---------------------------------------[ OK :) ]\n" RESET, *test);
+	}
+	else
+	{
+		printf(MAGENTA "%d-------------------------------------[ NOPE :( ]\n" RESET, *test);
+		if (fail == 0)
+			fail = *test;
+		god++;
+	}
+	if (*test == 1841)
+		exit(0);
+	(*test)++;
 }
 
-int main()
+int		main()
 {
-	char *str  = "Hell yeah";
-	int i = printf("yo - %10p %20s %d %c %d %i %% %010%\n", str, "print me", 9653, 75, 2342, 223112);
-	int j = ft_printf("my - %10p %20s %d %c %d %i %% %010%\n", str, "print me", 9653, 75, 2342, 223112);
-	// int i = printf("%% %10% %10.30% %*.*% %-10% %05% %020.30% %-0% %.% % \n", 40, 20);
-	// int j = ft_printf("%% %10% %10.30% %*.*% %-10%  %05% %020.30% %-0% %.% \n % \n", 40, 20);
-	// int j = ft_printf ("%");
-	while (1);
-	printf ("\n\n\nmy return - %d your return - %d", j, i);
+	int bli = 0;
+	int ble = 1234;
+	char *str = "qwer";
+	unsigned int bla = 1234;
+	int hex = 1234;
+	char c = 'a';
+	int cresc;
+	int t = 12;
+	char	*p1 = "abcdef";
+	int 	*p2;
+	p2 = NULL;
+	int wowo = -20;
+
+int test;
+int a;
+int b;
+
+test = 1;
+	a =  printf("A%0*.*i\n", -5, -5, 0);
+	b = ft_printf("B%0*.*i\n", -5, -5, 0);
+	rock_or_fail(a, b, &test);
+
+	a =  printf("A%0*.*i\n", 5, -5, 0);
+	b = ft_printf("B%0*.*i\n", 5, -5, 0);
+	rock_or_fail(a, b, &test);
+
+	a =  printf("A%*.*i\n", -5, -5, 0);
+	b = ft_printf("B%*.*i\n", -5, -5, 0);
+	rock_or_fail(a, b, &test);
+
+	a =  printf("A%*.*i\n", 5, -5, 0);
+	b = ft_printf("B%*.*i\n", 5, -5, 0);
+	rock_or_fail(a, b, &test);
+
+	a =  printf("A%0*.*i\n", -5, 5, 0);
+	b = ft_printf("B%0*.*i\n", -5, 5, 0);
+	rock_or_fail(a, b, &test);
+	
+// 	a =  printf("%0X%-s%%%-.0d%*cA3w%0.*xWXT\n", 0, "", -2147483647, 2, '\0', -8, 0);
+// 	b = ft_printf("%0X%-s%%%-.0d%*cA3w%0.*xWXT\n", 0, "", -2147483647, 2, '\0', -8, 0);
+// 	rock_or_fail(a, b, &test);
+
+
+// 	a =  printf("%-.4dw%*c%.*X\n", -2147483647, 6, 'a', -3, 0);
+// 	b = ft_printf("%-.4dw%*c%.*X\n", -2147483647, 6, 'a', -3, 0);
+// 	rock_or_fail(a, b, &test);
+
+// a =  printf("Y1Pox6eH%-2.*xRY2%-14.*x%.2XLKy%0*udKHbNQjB\n", -3, 0, 1, 0, -2147483647, 7, -2147483647);
+// 	b = ft_printf("Y1Pox6eH%-2.*xRY2%-14.*x%.2XLKy%0*udKHbNQjB\n", -3, 0, 1, 0, -2147483647, 7, -2147483647);
+// 	rock_or_fail(a, b, &test);
+
 }
 
 
@@ -166,6 +101,55 @@ int main()
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*static char	*representation;
+	static char	buffer[50];
+	char		*ptr;
+
+	printf("num - [%lld]\n",num);
+
+	representation = ft_strdup("0123456789abcdef");
+	ptr = &buffer[49];
+	*ptr = '\0';
+	while (1)
+	{
+		*--ptr = representation[num % base];
+		num /= base;
+		if (num == 0)
+			break ;
+	}
+
+	if (ft_strlen(ptr) <= 2 && block.p_avail)
+		ptr[0] = '\0';
+	free(representation);
+
+	return (ptr);
+	*/
 
 
 

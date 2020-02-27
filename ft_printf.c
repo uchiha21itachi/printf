@@ -33,7 +33,7 @@ f_list		parse_flags(f_list block, const char *format, int i)
 			block = update_flags(format[i++], block);
 		while (ft_isdigit(format[i]))
 			block.width = (block.width * 10) + (format[i++] - 48);
-		if (format[i] == '.')
+		if (format[i] == '.' && block.p_avail == 0)
 		{
 			block.p_avail = 1;
 			if (!(ft_isdigit(format[i + 1])))

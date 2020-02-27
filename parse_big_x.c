@@ -2,6 +2,7 @@
 
 char	*convert_X(long long num, int base, f_list block)
 {
+	
 	static char	*representation;
 	static char	buffer[50];
 	char		*ptr;
@@ -16,9 +17,10 @@ char	*convert_X(long long num, int base, f_list block)
 		if (num == 0)
 			break ;
 	}
-	if (ft_strlen(ptr) < 2 && block.p_avail)
-		ptr[0] = '\0';
 	free(representation);
+	if (ptr[0] == '0' && block.p_avail)
+		ptr[0] = '\0';
+	(void)(block);
 	return (ptr);
 }
 
@@ -35,6 +37,5 @@ f_list		parse_X(f_list block, va_list arg_list)
 	else
 		spaces = 0;
 	block = check_zeros(str, block, spaces);
-	// free(str);
 	return (block);
 }

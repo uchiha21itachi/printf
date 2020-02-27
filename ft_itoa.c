@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static	char	*reverse_string(char *s, int i, int neg)
+char	*reverse_string(char *s, int i, int neg)
 {
 	int		j;
 	char	*p;
@@ -36,6 +36,7 @@ static	char	*reverse_string(char *s, int i, int neg)
 		}
 		p[j] = 0;
 	}
+
 	return (p);
 }
 
@@ -73,7 +74,8 @@ char			*ft_itoa(int num)
 		num = num / 10;
 	}
 	str[i++] = num + 48;
+
 	p = reverse_string(str, i, neg);
-	// free (p);
+
 	return (p);
 }

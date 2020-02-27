@@ -62,6 +62,5 @@ char			*ft_utoa(long num)
 	}
 	str[i++] = num + 48;
 	p = reverse_string(str, i, neg);
-	// free (p);
 	return (p);
 }

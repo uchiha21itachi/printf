@@ -50,6 +50,11 @@ f_list		check_mod_stars(f_list block, const char *str, int i, va_list a_l)
 		{
 			block.w_star = 1;
 			block.width = va_arg(a_l, int);
+			if (block.width < 0)
+			{
+				block.width = -block.width;
+				block.minus_flag = 1;
+			}
 		}
 	}
 	return (block);
@@ -85,7 +90,6 @@ f_list		print_without_mf(f_list block, int spaces)
 		while (j++ < spaces)
 			block.count += write(1, "0", 1);
 		block.count += write(1, "%", 1);
-
 	}
 	else
 	{

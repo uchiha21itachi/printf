@@ -40,9 +40,9 @@ char	*get_str(va_list arg_list, f_list block)
 		str = ft_strdup(str);
 	if (block.p_avail)
 	{
-		if (block.precision <= 0)
+		if (block.precision == 0)
 			str[0] = '\0';
-		else if (block.precision < ft_strlen(str))
+		else if (block.precision < ft_strlen(str) && block.precision > 0)
 		{
 			while (i < block.precision)
 				i++;
@@ -75,8 +75,9 @@ f_list		print_string(char *str, f_list block, int spaces)
 f_list		parse_s(f_list block, va_list arg_list)
 {
 	char *str;
-	char spaces;
+	int spaces;
 
+	spaces = 0;
 	str = get_str(arg_list, block);
 	if (block.width > ft_strlen(str))
 		spaces = block.width - ft_strlen(str);
