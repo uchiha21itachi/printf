@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-char	*create_null_str(void)
+char		*create_null_str(void)
 {
 	char *s;
 
-	s = (char *)malloc(7 * sizeof (char));
+	s = (char *)malloc(7 * sizeof(char));
 	s[0] = '(';
 	s[1] = 'n';
 	s[2] = 'u';
@@ -27,7 +27,7 @@ char	*create_null_str(void)
 	return (s);
 }
 
-char	*get_str(va_list arg_list, f_list block)
+char		*get_str(va_list arg_list, t_list block)
 {
 	char	*str;
 	int		i;
@@ -52,7 +52,7 @@ char	*get_str(va_list arg_list, f_list block)
 	return (str);
 }
 
-f_list		print_string(char *str, f_list block, int spaces)
+t_list		print_string(char *str, t_list block, int spaces)
 {
 	int i;
 
@@ -72,18 +72,18 @@ f_list		print_string(char *str, f_list block, int spaces)
 	return (block);
 }
 
-f_list		parse_s(f_list block, va_list arg_list)
+t_list		parse_s(t_list block, va_list arg_list)
 {
-	char *str;
-	int spaces;
+	char	*str;
+	int		spaces;
 
 	spaces = 0;
 	str = get_str(arg_list, block);
 	if (block.width > ft_strlen(str))
 		spaces = block.width - ft_strlen(str);
 	else
-		spaces =  0;
+		spaces = 0;
 	block = print_string(str, block, spaces);
-	free (str);
+	free(str);
 	return (block);
 }

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char	*convert(long long num, int base, f_list block)
+char	*convert(long long num, int base, t_list block)
 {
 	static char	*representation;
 	static char	buffer[50];
@@ -36,11 +36,11 @@ char	*convert(long long num, int base, f_list block)
 	return (ptr);
 }
 
-f_list	parse_p(f_list block, va_list arg_list)
+t_list	parse_p(t_list block, va_list arg_list)
 {
 	unsigned long long	add;
-	char *ptr;
-	int spaces;
+	char				*ptr;
+	int					spaces;
 
 	add = va_arg(arg_list, unsigned long long);
 	ptr = convert(add, 16, block);
@@ -49,6 +49,5 @@ f_list	parse_p(f_list block, va_list arg_list)
 	else
 		spaces = 0;
 	block = print_string(ptr, block, spaces);
-	// free (ptr);
 	return (block);
 }

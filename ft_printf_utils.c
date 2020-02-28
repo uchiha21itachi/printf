@@ -14,20 +14,20 @@
 
 void	ft_putchar(char c)
 {
-	write (1, &c, 1);
+	write(1, &c, 1);
 }
 
-int	ft_isdigit(int c)
+int		ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }
 
-int	is_specifier(char c)
+int		is_specifier(char c)
 {
-	char 	*str;
-	
+	char	*str;
+
 	str = "sciduxXp";
 	while (*str)
 	{
@@ -36,20 +36,4 @@ int	is_specifier(char c)
 		str++;
 	}
 	return (0);
-}
-
-void	print_block(f_list block)
-{
-	printf ("\n-------------------------------------------------------------------\n");
-	printf ("\nPrinting all the values of block\n");
-	printf ("width - %d\n", block.width);
-	printf ("precision - %d\n", block.precision);
-	printf ("w.star - %d\n", block.w_star);
-	printf ("p.star - %d\n", block.p_star);
-	printf ("precision avail? - %d\n", block.p_avail);
-	printf ("zero flag - %d\n", block.zero_flag);
-	printf ("minus flag - %d\n", block.minus_flag);
-	printf ("block count - %d\n", block.count);
-	printf ("\n\n\n-------------------------------------------------------------------\n");
-
 }

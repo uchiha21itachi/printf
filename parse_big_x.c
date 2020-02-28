@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_big_x.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/28 16:47:29 by yassharm          #+#    #+#             */
+/*   Updated: 2020/02/28 16:48:17 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-char	*convert_X(long long num, int base, f_list block)
+char		*convert_big_x(long long num, int base, t_list block)
 {
-	
 	static char	*representation;
 	static char	buffer[50];
 	char		*ptr;
@@ -24,14 +35,14 @@ char	*convert_X(long long num, int base, f_list block)
 	return (ptr);
 }
 
-f_list		parse_X(f_list block, va_list arg_list)
+t_list		parse_big_x(t_list block, va_list arg_list)
 {
-	unsigned int x;
-	char	*str;
-	int		spaces;
+	unsigned int	x;
+	char			*str;
+	int				spaces;
 
 	x = va_arg(arg_list, unsigned int);
-	str = convert_X(x, 16, block);
+	str = convert_big_x(x, 16, block);
 	if (block.width > ft_strlen(str))
 		spaces = block.width - ft_strlen(str);
 	else

@@ -12,14 +12,14 @@
 
 #include "ft_printf.h"
 
-int		is_flag(char c)
+int			is_flag(char c)
 {
 	if (c == '-' || c == '0')
 		return (1);
 	return (0);
 }
 
-f_list		update_flags(char c, f_list block)
+t_list		update_flags(char c, t_list block)
 {
 	if (c == '-')
 		block.minus_flag = 1;
@@ -28,22 +28,22 @@ f_list		update_flags(char c, f_list block)
 	return (block);
 }
 
-f_list		check_stars(f_list block, const char *format, int i, va_list arg_list)
+t_list		check_stars(t_list block, const char *f, int i, va_list arg_list)
 {
-	while (format[++i] != '\0' && (!(is_specifier(format[i]))))
+	while (f[++i] != '\0' && (!(is_specifier(f[i]))))
 	{
-		if (format[i] == '.')
+		if (f[i] == '.')
 		{
 			i++;
-			if (format[i] == '*')
+			if (f[i] == '*')
 			{
 				block.p_star = 1;
 				block.p_avail = 1;
 				block.precision = va_arg(arg_list, int);
 			}
 		}
-		else if (format[i] == '*')
-		{	
+		else if (f[i] == '*')
+		{
 			block.w_star = 1;
 			block.width = va_arg(arg_list, int);
 			if (block.width < 0)
@@ -52,6 +52,25 @@ f_list		check_stars(f_list block, const char *format, int i, va_list arg_list)
 				block.minus_flag = 1;
 			}
 		}
-	}		
+	}
 	return (block);
+}
+
+int			check_mod(const char *format, int i)
+{
+	int result;
+
+	result = 0;
+	if (format[i + 1] != '\0')
+		i++;
+	else
+	{
+		result = -1;
+		return (result);
+	}
+	while (!(is_specifier(format[i])) && format[i] != '%' && format[i] != '\0')
+		i++;
+	if (format[i] == '%')
+		result = 1;
+	return (result);
 }

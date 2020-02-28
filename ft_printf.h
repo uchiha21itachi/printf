@@ -13,15 +13,15 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-#include <stdarg.h> 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+# include <stdarg.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 
-typedef struct	f_list
+typedef struct	s_list
 {
 	int		precision;
-	int 	p_star;
+	int		p_star;
 	int		p_avail;
 	int		width;
 	int		w_star;
@@ -29,58 +29,42 @@ typedef struct	f_list
 	int		zero_flag;
 	int		count;
 
-}				f_list;
+}				t_list;
 
-/*ft_printf functions*/
+int				ft_printf(const char *format, ...);
+t_list			set_data(t_list block, int i, const char *f, va_list arg_list);
+t_list			set_init_data(t_list block);
+t_list			parse_flags(t_list block, const char *format, int i);
+t_list			parse(t_list block, const char *f, int i, va_list arg_list);
 
-int			ft_printf(const char *format, ...);
-f_list		set_data(f_list block, int i, const char *format, va_list arg_list);
-f_list		set_init_data(f_list block);
-f_list		parse_flags(f_list block, const char *format, int i);
-f_list		parse(f_list block, const char *format, int i, va_list arg_list);
+t_list			update_flags(char c, t_list block);
+int				is_flag(char c);
+t_list			check_stars(t_list b, const char *f, int i, va_list arg_list);
+int				check_mod(const char *format, int i);
 
-/*parser functions inside parser.utils.c*/
+void			ft_putchar(char c);
+int				ft_isdigit(int c);
+int				is_specifier(char c);
 
-f_list		update_flags(char c, f_list block);
-int			is_flag(char c);
-f_list		check_stars(f_list block, const char *format, int i, va_list arg_list);
+int				ft_strlen(const char *s);
+char			*ft_strdup(char *s1);
+int				ft_putstr(char *s, int str_print_len);
 
-/*printing functions in ft_printf_utils */
+t_list			parse_s(t_list block, va_list arg_list);
+t_list			parse_c(t_list block, va_list arg_list);
+t_list			parse_p(t_list block, va_list arg_list);
+t_list			parse_d(t_list block, va_list arg_list);
+t_list			parse_u(t_list block, va_list arg_list);
+t_list			parse_x(t_list block, va_list arg_list);
+t_list			parse_big_x(t_list block, va_list arg_list);
+t_list			print_mod(t_list block, int i, const char *f, va_list arg_list);
 
-void		ft_putchar(char c);
-int			ft_isdigit(int c);
-void		print_block(f_list block);
-int			is_specifier(char c);
+t_list			print_string(char *str, t_list block, int spaces);
 
-// Functions handling string conversion in ft_printf_strings
-f_list		parse_s(f_list block, va_list arg_list);
-f_list		parse_c(f_list block, va_list arg_list);
-f_list		parse_p(f_list block, va_list arg_list);
-f_list		parse_d(f_list block, va_list arg_list);
-f_list		parse_u(f_list block, va_list arg_list);
-f_list		parse_x(f_list block, va_list arg_list);
-f_list		parse_X(f_list block, va_list arg_list);
-f_list		print_mod(f_list block, int i, const char *format, va_list arg_list);
-
-
-
-//Utils from libft in ft_printf_libft_utils
-int			ft_strlen(const char *s);
-char		*ft_strdup(char *s1);
-int			ft_putstr(char *s, int str_print_len);
-
-// functions from parse_s
-int			cal_output_len(f_list block, int len, int output_len);
-int			cal_spaces(int len, f_list block);
-f_list		print_string(char *str, f_list block, int spaces);
-
-//functions in ft_itoa
 char			*ft_itoa(int num);
 char			*ft_utoa(long num);
 
-f_list		check_zeros(char *num, f_list block, int spaces);
-f_list		print_number(f_list block, char *num, int zeros, int spaces);
-
-
+t_list			check_zeros(char *num, t_list block, int spaces);
+t_list			print_number(t_list block, char *num, int zeros, int spaces);
 
 #endif

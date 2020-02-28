@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/28 16:03:50 by yassharm          #+#    #+#             */
+/*   Updated: 2020/02/28 16:03:55 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-static	char	*reverse_string(char *s, long i, long neg)
+static	char		*reverse_string(char *s, long i, long neg)
 {
-	long		j;
+	long	j;
 	char	*p;
 
 	j = 0;
@@ -37,11 +49,11 @@ static	long		check_neg(long num)
 	return (neg);
 }
 
-char			*ft_utoa(long num)
+char				*ft_utoa(long num)
 {
-	long		rem;
-	long		neg;
-	long		i;
+	long	rem;
+	long	neg;
+	long	i;
 	char	str[11];
 	char	*p;
 

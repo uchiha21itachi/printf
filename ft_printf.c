@@ -12,9 +12,8 @@
 
 #include "ft_printf.h"
 
-f_list		set_init_data(f_list block)
+t_list		set_init_data(t_list block)
 {
-
 	block.precision = 0;
 	block.p_avail = 0;
 	block.p_star = 0;
@@ -25,7 +24,7 @@ f_list		set_init_data(f_list block)
 	return (block);
 }
 
-f_list		parse_flags(f_list block, const char *format, int i)
+t_list		parse_flags(t_list block, const char *format, int i)
 {
 	while (!(is_specifier(format[i++])))
 	{
@@ -46,7 +45,7 @@ f_list		parse_flags(f_list block, const char *format, int i)
 	return (block);
 }
 
-f_list		parse(f_list block, const char *format, int i, va_list arg_list)
+t_list		parse(t_list block, const char *format, int i, va_list arg_list)
 {
 	while (!(is_specifier(format[i])))
 		i++;
@@ -63,37 +62,17 @@ f_list		parse(f_list block, const char *format, int i, va_list arg_list)
 	else if (format[i] == 'x')
 		block = parse_x(block, arg_list);
 	else if (format[i] == 'X')
-		block = parse_X(block, arg_list);
+		block = parse_big_x(block, arg_list);
 	return (block);
 }
 
-f_list		set_data(f_list block, int i, const char *format, va_list arg_list)
+t_list		set_data(t_list block, int i, const char *format, va_list arg_list)
 {
 	block = set_init_data(block);
 	block = check_stars(block, format, i, arg_list);
 	block = parse_flags(block, format, i);
 	block = parse(block, &format[0], i, arg_list);
-
 	return (block);
-}
-
-int			check_mod(const char *format, int i)
-{
-	int result;
-
-	result = 0;
-	if (format[i + 1] != '\0')
-		i++;
-	else
-	{
-		result = -1;
-		return (result);
-	}
-	while (!(is_specifier(format[i])) && format[i] != '%' && format[i] != '\0')
-		i++;
-	if (format[i] == '%')
-		result = 1;
-	return (result);
 }
 
 int			ft_printf(const char *format, ...)
@@ -101,26 +80,24 @@ int			ft_printf(const char *format, ...)
 	va_list			arg_list;
 	int				i;
 	int				temp;
-	f_list			block;
+	t_list			block;
 
 	i = -1;
-	temp = 0;
 	block.count = 0;
 	va_start(arg_list, format);
 	while (format[++i] != '\0')
 	{
 		if (format[i] == '%')
-		{	
-			temp = check_mod(format, i);
-			if (temp == 1)
+		{
+			if (check_mod(format, i) == 1)
 				block = print_mod(block, i, format, arg_list);
 			else
 				block = set_data(block, i, format, arg_list);
-			while ((!(is_specifier(format[++i])) && (format[i] != '%')));
+			while ((!(is_specifier(format[++i])) && (format[i] != '%')))
+				temp = 0;
 		}
 		else
 			block.count += write(1, &format[i], 1);
-		
 	}
 	va_end(arg_list);
 	return (block.count);

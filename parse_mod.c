@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-f_list		parse_mod(f_list block, int i, const char *format)
+t_list		parse_mod(t_list block, int i, const char *format)
 {
 	while (format[++i] != '%' && format[i] != '\0')
 	{
@@ -33,7 +33,7 @@ f_list		parse_mod(f_list block, int i, const char *format)
 	return (block);
 }
 
-f_list		check_mod_stars(f_list block, const char *str, int i, va_list a_l)
+t_list		check_mod_stars(t_list block, const char *str, int i, va_list a_l)
 {
 	while (str[++i] != '%' && str[i] != '\0')
 	{
@@ -60,7 +60,7 @@ f_list		check_mod_stars(f_list block, const char *str, int i, va_list a_l)
 	return (block);
 }
 
-f_list		print_with_mf(f_list block, int spaces)
+t_list		print_with_mf(t_list block, int spaces)
 {
 	int j;
 
@@ -80,7 +80,7 @@ f_list		print_with_mf(f_list block, int spaces)
 	return (block);
 }
 
-f_list		print_without_mf(f_list block, int spaces)
+t_list		print_without_mf(t_list block, int spaces)
 {
 	int j;
 
@@ -100,7 +100,7 @@ f_list		print_without_mf(f_list block, int spaces)
 	return (block);
 }
 
-f_list		print_mod(f_list block, int i, const char *format, va_list arg_list)
+t_list		print_mod(t_list block, int i, const char *format, va_list arg_list)
 {
 	int		spaces;
 

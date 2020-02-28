@@ -12,50 +12,49 @@
 
 #include "ft_printf.h"
 
-char		*get_number(va_list arg_list, f_list block)
+char		*get_number(va_list arg_list, t_list block)
 {
-	int num;
-	char *num_str;
-	int i;
+	int		num;
+	char	*num_str;
+	int		i;
 
 	i = 0;
-	num =  va_arg(arg_list, int);
+	num = va_arg(arg_list, int);
 	num_str = ft_itoa(num);
-
 	if (block.p_avail)
 	{
-		// if (block.precision < 0)
-		// {
-		// 	num_str[0] = '0';
-		// 	num_str[1] = '\0';
-		// }
 		if (block.precision == 0 && num_str[0] == '0')
 			num_str[0] = '\0';
 	}
-
-	return (num_str); 
+	return (num_str);
 }
 
-f_list		print_number(f_list block, char *num, int zeros, int spaces)
+t_list		print_number_minus(t_list block, char *num, int zeros, int spaces)
 {
 	int i;
 
 	i = 0;
-
-	if (block.minus_flag)
+	if (num[0] == '-')
 	{
-		if (num[0] == '-')
-		{
-			block.count += write(1, "-", 1);
-			num++;
-		}
-		while (i++ < zeros)
-			block.count += write(1, "0", 1);
-		block.count += ft_putstr(num, ft_strlen(num));
-		i = 0;
-		while (i++ < spaces)
-			block.count += write(1, " ", 1);
+		block.count += write(1, "-", 1);
+		num++;
 	}
+	while (i++ < zeros)
+		block.count += write(1, "0", 1);
+	block.count += ft_putstr(num, ft_strlen(num));
+	i = 0;
+	while (i++ < spaces)
+		block.count += write(1, " ", 1);
+	return (block);
+}
+
+t_list		print_number(t_list block, char *num, int zeros, int spaces)
+{
+	int i;
+
+	i = 0;
+	if (block.minus_flag)
+		block = print_number_minus(block, num, zeros, spaces);
 	else
 	{
 		while (i++ < spaces)
@@ -73,7 +72,7 @@ f_list		print_number(f_list block, char *num, int zeros, int spaces)
 	return (block);
 }
 
-f_list		check_zeros(char *num, f_list block, int spaces)
+t_list		check_zeros(char *num, t_list block, int spaces)
 {
 	int zeros;
 
@@ -82,10 +81,14 @@ f_list		check_zeros(char *num, f_list block, int spaces)
 		zeros = block.precision - ft_strlen(num);
 		if (num[0] == '-')
 			zeros++;
-		// if ((spaces - zeros) > 0)
-			spaces = spaces - zeros;
+		spaces = spaces - zeros;
 	}
-	else if (((!block.p_avail) && block.zero_flag && block.minus_flag == 0)  || (block.precision < 0 && block.zero_flag && !(block.minus_flag)))
+	else if (((!block.p_avail) && block.zero_flag && block.minus_flag == 0))
+	{
+		zeros = spaces;
+		spaces = 0;
+	}
+	else if ((block.precision < 0 && block.zero_flag && !(block.minus_flag)))
 	{
 		zeros = spaces;
 		spaces = 0;
@@ -96,15 +99,14 @@ f_list		check_zeros(char *num, f_list block, int spaces)
 	return (block);
 }
 
-f_list		parse_d(f_list block, va_list arg_list)
+t_list		parse_d(t_list block, va_list arg_list)
 {
 	char	*num;
 	int		spaces;
 
 	num = get_number(arg_list, block);
-
 	if (block.width > ft_strlen(num))
-			spaces = block.width - ft_strlen(num);
+		spaces = block.width - ft_strlen(num);
 	else
 		spaces = 0;
 	block = check_zeros(num, block, spaces);

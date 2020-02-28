@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_strlen(const char *s)
+int		ft_strlen(const char *s)
 {
 	int length;
 
@@ -26,12 +26,11 @@ int	ft_strlen(const char *s)
 	return (length);
 }
 
-
 char	*ft_strdup(char *s1)
 {
 	char	*p;
-	int	length;
-	int	i;
+	int		length;
+	int		i;
 
 	i = 0;
 	length = ft_strlen(s1);
@@ -50,11 +49,10 @@ char	*ft_strdup(char *s1)
 	return (p);
 }
 
-
 int		ft_putstr(char *s, int str_print_len)
 {
 	int		i;
-	int 	count;
+	int		count;
 
 	count = 0;
 	i = 0;

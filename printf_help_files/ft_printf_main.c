@@ -63,5 +63,21 @@ test = 1;
 
 	printf("[%12c] [%1c] \n", 0, 95);
 	ft_printf("[%12c] [%1c] \n", 0, 95);
+}
+
+
+void	print_block(f_list block)
+{
+	printf ("\n-------------------------------------------------------------------\n");
+	printf ("\nPrinting all the values of block\n");
+	printf ("width - %d\n", block.width);
+	printf ("precision - %d\n", block.precision);
+	printf ("w.star - %d\n", block.w_star);
+	printf ("p.star - %d\n", block.p_star);
+	printf ("precision avail? - %d\n", block.p_avail);
+	printf ("zero flag - %d\n", block.zero_flag);
+	printf ("minus flag - %d\n", block.minus_flag);
+	printf ("block count - %d\n", block.count);
+	printf ("\n\n\n-------------------------------------------------------------------\n");
 
 }
