@@ -6,13 +6,13 @@
 /*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 22:10:23 by yassharm          #+#    #+#             */
-/*   Updated: 2020/02/17 22:10:24 by yassharm         ###   ########.fr       */
+/*   Updated: 2020/02/28 18:18:48 by yassharm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*convert(long long num, int base, t_list block)
+char	*convert(unsigned long long num, int base, t_list block)
 {
 	static char	*representation;
 	static char	buffer[50];
