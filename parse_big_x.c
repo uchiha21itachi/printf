@@ -18,7 +18,7 @@ char	*convert_X(long long num, int base, f_list block)
 			break ;
 	}
 	free(representation);
-	if (ptr[0] == '0' && block.p_avail)
+	if (ptr[0] == '0' && block.precision == 0 && block.p_avail)
 		ptr[0] = '\0';
 	(void)(block);
 	return (ptr);

@@ -25,11 +25,6 @@ char		*get_number_u(va_list arg_list, f_list block)
 	num_str = ft_utoa(num);
 	if (block.p_avail)
 	{
-		// if (block.precision < 0)
-		// {
-		// 	num_str[0] = '0';
-		// 	num_str[1] = '\0';
-		// }
 		if (block.precision == 0 && num == 0)
 			num_str[0] = '\0';
 	}
@@ -82,10 +77,14 @@ f_list		check_zeros_u(char *num, f_list block, int spaces)
 		zeros = block.precision - ft_strlen(num);
 		if (num[0] == '-')
 			zeros++;
-		// if ((spaces - zeros) > 0)
-			spaces = spaces - zeros;
+		spaces = spaces - zeros;
 	}
-	else if (((!block.p_avail) && block.zero_flag && block.minus_flag == 0)  || (block.precision < 0 && block.zero_flag))
+	else if (((!block.p_avail) && block.zero_flag && block.minus_flag == 0))
+	{
+		zeros = spaces;
+		spaces = 0;
+	}
+	else if ((block.zero_flag) && !(block.minus_flag) && (block.precision < 0))
 	{
 		zeros = spaces;
 		spaces = 0;
